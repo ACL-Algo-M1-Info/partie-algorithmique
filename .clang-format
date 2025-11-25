@@ -1,0 +1,13 @@
+﻿# N'oubliez-pas d'activer le parsing de ce fichier dans "Settings > Editor > Code Style > C/C++ > Read code style from .clang-format files"
+
+# Ecriture basée sur le style de Google.
+BasedOnStyle: Google
+
+# Les accolades retournent à la ligne.
+BreakBeforeBraces: Allman
+
+# Espace à mettre.
+IndentWidth: 4
+
+# Force à coller l'étoile des pointeurs à gauche.
+PointerAlignment: Left
