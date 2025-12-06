@@ -86,8 +86,8 @@ Instance* genererInstanceAleatoire()
     int randM = rand() % MAX_M_ALEA_GEN;
 
     // Tableaux aléatoires des p(i) et q(i)
-    int randP[randN];
-    int randQ[randN];
+    double randP[randN];
+    double randQ[randN];
 
     // Assignation des valeurs aléatoires p(i) et q(i)
     for (int i = 0; i < randN; i++)
