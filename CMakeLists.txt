@@ -16,6 +16,10 @@ set(TESTS tests)
 # Types
 set(TYPES ${SRC}/types)
 
+### UTILS
+
+set(UTILS ${SRC}/utils/utils.c)
+
 ### TAD
 
 # TAD Instance
@@ -33,8 +37,10 @@ set(TAD_TABLEAU_DYNAMIQUE ${TYPES}/tableauDynamique/tableauDynamique.c)
 
 # Executable Main
 add_executable(Algorithmie ${SRC}/main.c
-    ${TAD_INSTANCE}
-    ${TAD_ORDONNANCEMENT_MACHINE}
+        ${UTILS}
+
+        ${TAD_INSTANCE}
+        ${TAD_ORDONNANCEMENT_MACHINE}
 )
 
 
