@@ -5,5 +5,4 @@
 #include "algo.h"
 
 void test(){
-
 }
