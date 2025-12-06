@@ -5,7 +5,7 @@ project(Algorithmie C)
 
 set(CMAKE_C_STANDARD 17)
 
-### FILESYSTEM
+## FILESYSTEM
 
 # Racine
 set(SRC src)
@@ -13,41 +13,40 @@ set(SRC src)
 # Tests
 set(TESTS tests)
 
-# Types
-set(TYPES ${SRC}/types)
+### IMPORTS AUTOMATIQUES ###
 
-### UTILS
+# Fait une liste avec tous les .c et .h du projet.
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${SRC}/*.c ${SRC}/*.h)
 
-set(UTILS ${SRC}/utils/utils.c)
+# Exclut src/main.c.
+list(REMOVE_ITEM SOURCES ${SRC}/main.c)
 
-### TAD
+# Créé la librairie avec les fichiers obtenus.
+add_library(CORE ${SOURCES})
 
-# TAD Instance
-set(TAD_INSTANCE ${TYPES}/instance/instance.c)
-
-# TAD OrdonnancementMachine
-set(TAD_ORDONNANCEMENT_MACHINE ${TYPES}/ordonnancementMachine/ordonnancementMachine.c)
-
-# TAD TableauDynamique
-set(TAD_TABLEAU_DYNAMIQUE ${TYPES}/tableauDynamique/tableauDynamique.c)
-
-### ALGO
+# Ajoute le target sur la racine src
+target_include_directories(CORE PUBLIC ${SRC})
 
 ### EXECUTABLES ###
 
-# Executable Main
-add_executable(Algorithmie ${SRC}/main.c
-        ${UTILS}
+## Executable Main
+add_executable(Algorithmie ${SRC}/main.c)
+target_link_libraries(Algorithmie PRIVATE CORE)
 
-        ${TAD_INSTANCE}
-        ${TAD_ORDONNANCEMENT_MACHINE}
-)
+## Tests
 
+# Tableaux dynamiques
+add_executable(testTableauDynamique ${TESTS}/testTableauDynamique.c)
+target_link_libraries(testTableauDynamique PRIVATE CORE)
 
-add_executable(testTableauDynamique ${TESTS}/testTableauDynamique.c
-        ${TAD_TABLEAU_DYNAMIQUE}
-)
+# Instance
+add_executable(testInstance ${TESTS}/testInstance.c)
+target_link_libraries(testInstance PRIVATE CORE)
 
-add_executable(testTriFusion ${TESTS}/testTriFusion.c
-        ${UTILS}
-)
+# OrdonnancementMachine
+add_executable(testOrdonnancementMachine ${TESTS}/testOrdonnancementMachine.c)
+target_link_libraries(testOrdonnancementMachine PRIVATE CORE)
+
+# Etat
+add_executable(testEtat ${TESTS}/testEtat.c)
+target_link_libraries(testEtat PRIVATE CORE)

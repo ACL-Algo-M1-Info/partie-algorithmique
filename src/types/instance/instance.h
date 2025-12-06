@@ -36,6 +36,13 @@ typedef struct _Instance
 Instance* newInstance(int n, int m, int* p, int* q);
 
 /**
+ * Supprime une instance.
+ *
+ * @param instance L'instance à supprimer.
+ */
+void deleteInstance(Instance* instance);
+
+/**
  * Clone une instance
  *
  * @param source  l'instance à cloner
@@ -43,5 +50,11 @@ Instance* newInstance(int n, int m, int* p, int* q);
  */
 Instance* cloneInstance(Instance* source);
 
+/**
+ * Affiche une instance.
+ *
+ * @param instance Instance à afficher.
+ */
+void afficheInstance(const Instance* instance);
 
 #endif //INSTANCE_H
