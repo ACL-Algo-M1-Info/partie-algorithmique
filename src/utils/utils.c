@@ -94,13 +94,6 @@ Instance** genererInstancesAleatoires(int nbInstances)
     return res;
 }
 
-int comparaisonEntierDecroissant(int a, int b)
-{
-    if (a > b) return -1;
-
-    return 1;
-}
-
 void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp)
 {
     if(j <= i) return;

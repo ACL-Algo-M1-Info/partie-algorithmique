@@ -74,12 +74,23 @@ Instance* genererInstanceAleatoire();
  */
 Instance** genererInstancesAleatoires(int nbInstances);
 
-int comparaisonEntierDecroissant(int a, int b);
-
-
+/**
+ * Applique le tri fusion sur les qi d'une instance donnée
+ *
+ * @param i le début du tableau
+ * @param j la taille du tableau - 1
+ * @param instance l'instance où on veut appliquer le tri
+ * @param tq tableau pour stocker provisoirement les qi
+ * @param tp tableau pour stocker provisoirement les pi
+ */
 void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp);
 
 
+/**
+ * Applique l'ordre de Jackson sur les qi d'une instance
+ *
+ * @param i l'instance où l'on veut appliquer l'ordre
+ */
 void triJacksonQ(Instance* i);
 
 #endif  // ALGORITHMIE_UTILS_H
