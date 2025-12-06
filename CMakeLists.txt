@@ -24,6 +24,9 @@ set(TAD_INSTANCE ${TYPES}/instance/instance.c)
 # TAD OrdonnancementMachine
 set(TAD_ORDONNANCEMENT_MACHINE ${TYPES}/ordonnancementMachine/ordonnancementMachine.c)
 
+# TAD TableauDynamique
+set(TAD_TABLEAU_DYNAMIQUE ${TYPES}/tableauDynamique/tableauDynamique.c)
+
 ### ALGO
 
 ### EXECUTABLES ###
@@ -32,4 +35,9 @@ set(TAD_ORDONNANCEMENT_MACHINE ${TYPES}/ordonnancementMachine/ordonnancementMach
 add_executable(Algorithmie ${SRC}/main.c
     ${TAD_INSTANCE}
     ${TAD_ORDONNANCEMENT_MACHINE}
+)
+
+
+add_executable(testTableauDynamique ${TESTS}/testTableauDynamique.c
+        ${TAD_TABLEAU_DYNAMIQUE}
 )
