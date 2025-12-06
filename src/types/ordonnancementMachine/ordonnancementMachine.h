@@ -38,6 +38,12 @@ typedef struct _OrdonnancementMachine
 OrdonnancementMachine* newOrdonnancementMachine();
 
 /**
+ * Supprime un ordonnancement machine.
+ * @param ordonnancement Ordonnancement à supprimer.
+ */
+void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement);
+
+/**
  * Clone un ordonnancement de machine depuis une source. Le clone est profond,
  * et va réallouer toutes les ressources internes nécessaires.
  * @param source L'ordonnancement duquel puiser les informatons.

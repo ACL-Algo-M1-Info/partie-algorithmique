@@ -20,6 +20,12 @@ OrdonnancementMachine* newOrdonnancementMachine()
     return ordonnancement;
 }
 
+void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement)
+{
+    // TODO free la dyntable
+    free(ordonnancement);
+}
+
 OrdonnancementMachine* cloneOrdonnancementMachine(OrdonnancementMachine* source)
 {
     OrdonnancementMachine* ordonnancement = newOrdonnancementMachine();
