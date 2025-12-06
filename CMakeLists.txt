@@ -30,5 +30,6 @@ set(TAD_ORDONNANCEMENT_MACHINE ${TYPES}/ordonnancementMachine/ordonnancementMach
 
 # Executable Main
 add_executable(Algorithmie ${SRC}/main.c
+    ${TAD_INSTANCE}
     ${TAD_ORDONNANCEMENT_MACHINE}
 )
