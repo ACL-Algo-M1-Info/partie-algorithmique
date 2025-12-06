@@ -137,13 +137,13 @@ void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp)
             pg++;
         }
         else if (instance->q[pg] > instance->q[pd])
-        { //le pointeur du sous-tableau de gauche pointe vers un élément plus petit
+        {
             tq[c] = instance->q[pg];
             tp[c] = instance->p[pg];
             pg++;
         }
         else
-        {  //le pointeur du sous-tableau de droite pointe vers un élément plus petit
+        {
             tq[c] = instance->q[pd];
             tp[c] = instance->p[pd];
             pd++;
