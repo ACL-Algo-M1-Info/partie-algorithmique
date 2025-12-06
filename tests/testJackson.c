@@ -15,8 +15,8 @@ int main()
         int n = 5;
         int m = 3;
 
-        int p[] = {5, 3, 1, 5, 9};
-        int q[] = {1, 2, 3, 4, 5};
+        double p[] = {5, 3, 1, 5, 9};
+        double q[] = {1, 2, 3, 4, 5};
 
         Instance* i = newInstance(n, m, p, q);
 

@@ -21,7 +21,7 @@ typedef struct _OrdonnancementMachine
     TableauDynamique* tabId;
 
     /** Cmax local à la machine. */
-    int cmax;
+    double cmax;
 
 } OrdonnancementMachine;
 
@@ -59,7 +59,7 @@ void afficheOrdonnancementMachine(const OrdonnancementMachine* ordonnancement);
  * @param i Indice de la tâche à ajouter.
  * @param pi Durée opératoire de la tâche à ajouter.
  */
-void ajouterTache(OrdonnancementMachine* ordonnancement, int i, int pi);
+void ajouterTache(OrdonnancementMachine* ordonnancement, int i, double pi);
 
 /**
  * Ajoute une tâche à l'ordonnancement en fin de position.

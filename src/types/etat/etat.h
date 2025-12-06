@@ -18,7 +18,7 @@
 typedef struct _Etat
 {
     /** Durée opératoire + durée de latence max de l'état */
-    int lmax;
+    double lmax;
     /** Nombre de machines */
     int m;
     /** Tableau d'ordonnancements de machines */
@@ -65,7 +65,7 @@ void afficheEtat(Etat *etat);
  * @param pi la durée opératoire de la tâche i
  * @param qi la durée de latence de la tâche i
  */
-void ajouterTacheSurMachine(Etat* etat, int k, int i, int pi, int qi);
+void ajouterTacheSurMachine(Etat* etat, int k, int i, double pi, double qi);
 
 /**
  *

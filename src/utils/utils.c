@@ -64,6 +64,21 @@ void afficheArrayInt(int n, const int array[n])
     printf("]");
 }
 
+void afficheArrayDouble(int n, const double array[n])
+{
+    printf("[");
+
+    for (int i = 0; i < n; i ++)
+    {
+        printf("%.2lf", array[i]);
+
+        if (i < n - 1)
+            printf(", ");
+    }
+
+    printf("]");
+}
+
 Instance* genererInstanceAleatoire()
 {
     // Génération aléatoire.
@@ -99,7 +114,7 @@ Instance** genererInstancesAleatoires(int nbInstances)
     return res;
 }
 
-void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp)
+void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *tp)
 {
     if(j <= i) return;
 
@@ -158,8 +173,8 @@ void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp)
 
 void triJacksonQ(Instance* i)
 {
-    int tq[i->n];
-    int tp[i->n];
+    double tq[i->n];
+    double tp[i->n];
     triFusionDecroissant(0, i->n-1, i, tq, tp);
 }
 

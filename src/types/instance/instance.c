@@ -13,15 +13,15 @@
 
 // FONCTIONS
 
-Instance* newInstance(int n, int m, int* p, int* q)
+Instance* newInstance(int n, int m, double *p, double *q)
 {
     Instance* instance = malloc(sizeof(struct _Instance));
     assert(instance);
 
     instance->n = n;
     instance->m = m;
-    instance->p = malloc(n*sizeof(int));
-    instance->q = malloc(n*sizeof(int));
+    instance->p = malloc(n*sizeof(double));
+    instance->q = malloc(n*sizeof(double));
     assert(instance->p && instance->q);
 
     for (int i = 0; i < n; i++)
@@ -54,8 +54,8 @@ void afficheInstance(const Instance* instance)
     assert(instance);
 
     printf("Instance[n = %d, m = %d, p = ", instance->n, instance->m);
-    afficheArrayInt(instance->n, instance->p);
+    afficheArrayDouble(instance->n, instance->p);
     printf(", q = ");
-    afficheArrayInt(instance->n, instance->q);
+    afficheArrayDouble(instance->n, instance->q);
     printf("]");
 }

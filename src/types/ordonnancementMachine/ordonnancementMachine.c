@@ -15,7 +15,7 @@
 
 OrdonnancementMachine* newOrdonnancementMachine()
 {
-    OrdonnancementMachine* ordonnancement = (OrdonnancementMachine*)malloc(sizeof(struct _OrdonnancementMachine));
+    OrdonnancementMachine* ordonnancement = malloc(sizeof(struct _OrdonnancementMachine));
     assert(ordonnancement);
 
     ordonnancement->cmax = 0;
@@ -51,14 +51,14 @@ void afficheOrdonnancementMachine(const OrdonnancementMachine* ordonnancement)
 {
     assert(ordonnancement);
 
-    printf("Ordonnancement[cmax = %d, tabId = ", ordonnancement->cmax);
+    printf("Ordonnancement[cmax = %.2lf, tabId = ", ordonnancement->cmax);
 
     afficheTableauDynamique(ordonnancement->tabId, (void (*)(const void*))afficheInt);
 
     printf("]");
 }
 
-void ajouterTache(OrdonnancementMachine* ordonnancement, int i, int pi)
+void ajouterTache(OrdonnancementMachine* ordonnancement, int i, double pi)
 {
     assert(ordonnancement && i >= 0 && pi >= 0);
 

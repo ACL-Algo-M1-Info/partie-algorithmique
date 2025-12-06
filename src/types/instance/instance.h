@@ -17,9 +17,9 @@ typedef struct _Instance
     /** Nombre de machines */
     int m;
     /** Durée opératoire des tâches */
-    int* p;
+    double* p;
     /** Durée de latence des tâches */
-    int* q;
+    double* q;
 } Instance;
 
 // FONCTIONS
@@ -33,7 +33,7 @@ typedef struct _Instance
  * @param q la durée de latence des tâches
  * @return une instance du problème
  */
-Instance* newInstance(int n, int m, int* p, int* q);
+Instance* newInstance(int n, int m, double *p, double *q);
 
 /**
  * Supprime une instance.

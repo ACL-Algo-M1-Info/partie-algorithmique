@@ -69,6 +69,13 @@ void afficheArray(int n, const void* array[n], void (*afficheur)(const void*));
 void afficheArrayInt(int n, const int array[n]);
 
 /**
+ * Affiche une liste de double
+ * @param n la taille de l'array
+ * @param array le tableau de doubles à afficher
+ */
+void afficheArrayDouble(int n, const double array[n]);
+
+/**
  * Génère une instance aléatoirement.
  * @return Instance générée aléatoirement.
  */
@@ -90,7 +97,7 @@ Instance** genererInstancesAleatoires(int nbInstances);
  * @param tq tableau pour stocker provisoirement les qi
  * @param tp tableau pour stocker provisoirement les pi
  */
-void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp);
+void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *tp);
 
 
 /**

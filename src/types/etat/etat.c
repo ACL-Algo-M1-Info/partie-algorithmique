@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "etat.h"
 #include "../../utils/utils.h"
@@ -66,12 +67,12 @@ Etat* cloneEtat(Etat* source)
 
 void afficheEtat(Etat *etat)
 {
-    printf("Etat[Lmax = %d, m = %d, ordonnancements = ", etat->lmax, etat->m);
+    printf("Etat[Lmax = %.2lf, m = %d, ordonnancements = ", etat->lmax, etat->m);
     afficheArray(etat->m, (const void**)etat->ordonnancements, (void (*)(const void*))afficheOrdonnancementMachine);
     printf("]");
 }
 
-void ajouterTacheSurMachine(Etat* etat, int k, int i, int pi, int qi)
+void ajouterTacheSurMachine(Etat* etat, int k, int i, double pi, double qi)
 {
     assert(etat);
     assert(k >= 0 && i >= 0 && pi >= 0 && qi >= 0);
@@ -79,7 +80,7 @@ void ajouterTacheSurMachine(Etat* etat, int k, int i, int pi, int qi)
     // On ajoute d'abord la tâche sur la machine pour avoir le nouveau cmax
     ajouterTache(etat->ordonnancements[k], i, pi);
     // Recalcul du lmax selon l'ajout fait précedemment
-    etat->lmax = imax(etat->ordonnancements[k]->cmax + qi, etat->lmax);
+    etat->lmax = fmax(etat->ordonnancements[k]->cmax + qi, etat->lmax);
 }
 
 void ajouterTacheSurMachineParInstance(Etat* etat, int k, int i, Instance* instance)
