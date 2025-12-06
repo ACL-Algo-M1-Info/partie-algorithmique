@@ -17,9 +17,11 @@
 typedef struct _OrdonnancementMachine
 {
     /** Nombre de tâches. */
+    // TODO à supprimer dès lors qu'on met une dyntable.
     int taille;
 
     /** Tableau ordonné des IDs des tâches placées sur cette machine. */
+    // TODO à transformer en dyntable.
     int* tabId;
 
     /** Cmax local à la machine. */
@@ -45,16 +47,18 @@ OrdonnancementMachine* cloneOrdonnancementMachine(OrdonnancementMachine* source)
 
 /**
  * Ajoute une tâche à l'ordonnancement en fin de position.
+ * @param ordonnancement L'ordonnancement à manipuler.
  * @param i Indice de la tâche à ajouter.
  * @param pi Durée opératoire de la tâche à ajouter.
  */
-void ajouterTache(int i, int pi);
+void ajouterTache(OrdonnancementMachine* ordonnancement, int i, int pi);
 
 /**
  * Ajoute une tâche à l'ordonnancement en fin de position.
+ * @param ordonnancement L'ordonnancement à manipuler.
  * @param i Tâche à rajouter dans l'ordonnancement.
  * @param instance Instance depuis laquelle piocher les informations.
  */
-void ajouterTacheParInstance(int i, Instance* instance);
+void ajouterTacheParInstance(OrdonnancementMachine* ordonnancement, int i, Instance* instance);
 
 #endif //ORDONNANCEMENTMACHINE_H
