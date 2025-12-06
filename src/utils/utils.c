@@ -101,7 +101,7 @@ int comparaisonEntierDecroissant(int a, int b)
     return 1;
 }
 
-void triFusionDecroissant(int i, int j, int* tab, int* tmp)
+void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp)
 {
     if(j <= i) return;
 
@@ -109,9 +109,9 @@ void triFusionDecroissant(int i, int j, int* tab, int* tmp)
     int m = (i + j) / 2;
 
     // Tri de la moitié gauche
-    triFusionDecroissant(i, m, tab, tmp);
+    triFusionDecroissant(i, m, instance, tq, tp);
     // Tri de la moitié droite
-    triFusionDecroissant(m + 1, j, tab, tmp);
+    triFusionDecroissant(m + 1, j, instance, tq, tp);
 
     // Pointeur du sous tableau gauche
     int pg = i;
@@ -126,23 +126,26 @@ void triFusionDecroissant(int i, int j, int* tab, int* tmp)
     {
         if(pg == m + 1)
         {
-            tmp[c] = tab[pd];
+            tq[c] = instance->q[pd];
+            tp[c] = instance->p[pd];
             pd++;
         }
         else if (pd == j + 1)
         {
-            tmp[c] = tab[pg];
+            tq[c] = instance->q[pg];
+            tp[c] = instance->p[pg];
             pg++;
         }
-        else if (tab[pg] > tab[pd])
+        else if (instance->q[pg] > instance->q[pd])
         { //le pointeur du sous-tableau de gauche pointe vers un élément plus petit
-            tmp[c] = tab[pg];
-            //tmp[c] = tab[pg];
+            tq[c] = instance->q[pg];
+            tp[c] = instance->p[pg];
             pg++;
         }
         else
         {  //le pointeur du sous-tableau de droite pointe vers un élément plus petit
-            tmp[c] = tab[pd];
+            tq[c] = instance->q[pd];
+            tp[c] = instance->p[pd];
             pd++;
         }
     }
@@ -150,14 +153,16 @@ void triFusionDecroissant(int i, int j, int* tab, int* tmp)
     // Copie des éléments dans tab
     for(c = i; c <= j; c++)
     {
-        tab[c] = tmp[c];
+        instance->q[c] = tq[c];
+        instance->p[c] = tp[c];
     }
 }
 
 void triJacksonQ(Instance* i)
 {
-    int tmp[i->n];
-    triFusionDecroissant(0, i->n-1, i->q,tmp);
+    int tq[i->n];
+    int tp[i->n];
+    triFusionDecroissant(0, i->n-1, i, tq, tp);
 }
 
 

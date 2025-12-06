@@ -77,7 +77,7 @@ Instance** genererInstancesAleatoires(int nbInstances);
 int comparaisonEntierDecroissant(int a, int b);
 
 
-void triFusionDecroissant(int i, int j, int* tab, int* tmp);
+void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp);
 
 
 void triJacksonQ(Instance* i);
