@@ -5,6 +5,7 @@
 // INCLUSIONS
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <assert.h>
 
 #include "tableauDynamique.h"
@@ -88,4 +89,84 @@ void decrementeTailleEffectifTableauDynamique(TableauDynamique* tab)
     assert(tab);
     assert(!tableauDynamiqueEstVide(tab));
     tab->tailleEffectif--;
+}
+
+void deleteTableauDynamique(TableauDynamique* tab,
+                            void (*deleteElement)(void*))
+{
+    assert(tab && tab->T);
+
+    if (deleteElement)
+    {
+        for (int i = 0; i < tab->tailleEffectif; i++)
+        {
+            deleteElement(getElementTableauDynamique(tab, i));
+        }
+    }
+
+    free(tab->T);
+    free(tab);
+}
+
+void afficheTableauDynamique(const TableauDynamique* tab,
+                             void (*afficheElement)(const void*))
+{
+    assert(tab);
+
+    printf("Taille : %d\nTaille effectif %d\n", getTailleTableauDynamique(tab),
+           getTailleEffectifTableauDynamique(tab));
+    printf("[");
+
+    for (int i = 0; i < getTailleEffectifTableauDynamique(tab); i++)
+    {
+        afficheElement(getElementTableauDynamique(tab, i));
+        if (i < getTailleEffectifTableauDynamique(tab) - 1)
+        {
+            printf(", ");
+        }
+    }
+    printf("]\n");
+}
+
+
+/**
+ * Double la taille du tableau T
+ * @param tab
+ */
+static void dedoubleTaille(TableauDynamique* tab)
+{
+    assert(tab);
+    tab->T = realloc(tab->T, tab->taille * 2 * sizeof(void*));
+    assert(tab->T);
+    tab->taille *= 2;
+}
+
+void insereElementTableauDynamique(TableauDynamique* tab, void* element)
+{
+    assert(tab && tab->T);
+    if (tableauDynamiqueEstPlein(tab))
+    {
+        dedoubleTaille(tab);
+    }
+    setElementTableauDynamique(tab, getTailleEffectifTableauDynamique(tab),
+                               element);
+    incrementeTailleEffectifTableauDynamique(tab);
+}
+
+TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,
+                                        void*(*cloneurElement)(void*))
+{
+    assert(tab && tab->T);
+
+    TableauDynamique* cloneTab = newTableauDynamique();
+
+    if (cloneurElement)
+    {
+        for (int i = 0; i < getTailleEffectifTableauDynamique(tab); i++)
+        {
+            insereElementTableauDynamique(cloneTab, cloneurElement(tab->T[i]));
+        }
+    }
+
+    return cloneTab;
 }
