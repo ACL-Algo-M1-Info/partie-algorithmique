@@ -48,5 +48,5 @@ void ajouterTache(OrdonnancementMachine* ordonnancement, int i, int pi)
 
 void ajouterTacheParInstance(OrdonnancementMachine* ordonnancement, int i, Instance* instance)
 {
-    ajouterTache(ordonnancement, i, instance->pi[i]);
+    ajouterTache(ordonnancement, i, instance->p[i]);
 }

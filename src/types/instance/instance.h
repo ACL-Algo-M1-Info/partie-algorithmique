@@ -17,9 +17,9 @@ typedef struct _Instance
     /** Nombre de machines */
     int m;
     /** Durée opératoire des tâches */
-    int* pi;
+    int* p;
     /** Durée de latence des tâches */
-    int* qi;
+    int* q;
 } Instance;
 
 // FONCTIONS
@@ -29,11 +29,11 @@ typedef struct _Instance
  *
  * @param n le nombre de tâches
  * @param m le nombre de mâchines
- * @param pi la durée opératoire des tâches
- * @param qi la durée de latence des tâches
+ * @param p la durée opératoire des tâches
+ * @param q la durée de latence des tâches
  * @return une instance du problème
  */
-Instance* newInstance(int n, int m, int* pi, int* qi);
+Instance* newInstance(int n, int m, int* p, int* q);
 
 /**
  * Clone une instance
