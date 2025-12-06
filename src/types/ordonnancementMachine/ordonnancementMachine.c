@@ -29,11 +29,7 @@ void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement)
     assert(ordonnancement);
 
     // Ici, tous les ints sont préalloués pour que l'ajout se fasse bien. On vient les free.
-    for (int i = 0; i < getTailleEffectifTableauDynamique(ordonnancement->tabId); i++)
-        free( getElementTableauDynamique(ordonnancement->tabId, i) );
-
-    // Free des structures.
-    free(ordonnancement->tabId);
+    deleteTableauDynamique(ordonnancement->tabId, deleteInt);
     free(ordonnancement);
 }
 

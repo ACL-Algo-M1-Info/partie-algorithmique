@@ -50,3 +50,7 @@ target_link_libraries(testOrdonnancementMachine PRIVATE CORE)
 # Etat
 add_executable(testEtat ${TESTS}/testEtat.c)
 target_link_libraries(testEtat PRIVATE CORE)
+
+# Jackson
+add_executable(testJackson ${TESTS}/testJackson.c)
+target_link_libraries(testJackson PRIVATE CORE)

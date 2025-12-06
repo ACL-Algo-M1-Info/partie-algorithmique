@@ -16,6 +16,11 @@ int imax(int a, int b)
     return a > b ? a : b;
 }
 
+void deleteInt(void* i)
+{
+    free(i);
+}
+
 int* cloneInt(const int* source)
 {
     int* res = (int*)malloc(sizeof(int));
@@ -93,3 +98,70 @@ Instance** genererInstancesAleatoires(int nbInstances)
 
     return res;
 }
+
+void triFusionDecroissant(int i, int j, Instance* instance, int* tq, int* tp)
+{
+    if(j <= i) return;
+
+    // Milieu du tableau
+    int m = (i + j) / 2;
+
+    // Tri de la moitié gauche
+    triFusionDecroissant(i, m, instance, tq, tp);
+    // Tri de la moitié droite
+    triFusionDecroissant(m + 1, j, instance, tq, tp);
+
+    // Pointeur du sous tableau gauche
+    int pg = i;
+    // Pointeur du sous tableau droite
+    int pd = m + 1;
+
+    // Compteur
+    int c;
+
+    // Remplissage de i à j pour le tableau fusionné
+    for(c = i; c <= j; c++)
+    {
+        if(pg == m + 1)
+        {
+            tq[c] = instance->q[pd];
+            tp[c] = instance->p[pd];
+            pd++;
+        }
+        else if (pd == j + 1)
+        {
+            tq[c] = instance->q[pg];
+            tp[c] = instance->p[pg];
+            pg++;
+        }
+        else if (instance->q[pg] > instance->q[pd])
+        {
+            tq[c] = instance->q[pg];
+            tp[c] = instance->p[pg];
+            pg++;
+        }
+        else
+        {
+            tq[c] = instance->q[pd];
+            tp[c] = instance->p[pd];
+            pd++;
+        }
+    }
+
+    // Copie des éléments dans tab
+    for(c = i; c <= j; c++)
+    {
+        instance->q[c] = tq[c];
+        instance->p[c] = tp[c];
+    }
+}
+
+void triJacksonQ(Instance* i)
+{
+    int tq[i->n];
+    int tp[i->n];
+    triFusionDecroissant(0, i->n-1, i, tq, tp);
+}
+
+
+
