@@ -118,13 +118,20 @@ void testcloneTableauDynamique()
     int* i3 = malloc(sizeof(int));
     *i3 = -99;
     TableauDynamique* tab = newTableauDynamique();
-    insereElementTableauDynamique(tab,i1);
-    insereElementTableauDynamique(tab,i2);
+    insereElementTableauDynamique(tab, i1);
+    insereElementTableauDynamique(tab, i2);
 
     TableauDynamique* clone = cloneTableauDynamique(tab, cloneEntier);
+    assert(getElementTableauDynamique(clone,0)!=i1);
+    assert(getElementTableauDynamique(clone,1)!=i2);
     setElementTableauDynamique(tab, 0, i3);
-    afficheTableauDynamique(clone, afficheEntier);
-    afficheTableauDynamique(tab,afficheEntier);
+    assert(getElementTableauDynamique(clone,0)!=i3);
+    assert(getElementTableauDynamique(clone,1)!=i2);
+
+    assert(getElementTableauDynamique(tab,0)==i3);
+    assert(getElementTableauDynamique(tab,1)==i2);
+    // afficheTableauDynamique(clone, afficheEntier);
+    // afficheTableauDynamique(tab,afficheEntier);
 }
 
 int main()
@@ -133,6 +140,6 @@ int main()
     lancerTest("testGetteursSetteursTableauDynamique",
                testGetteursSetteursTableauDynamique);
     lancerTest("testInsertTableauDynamique", testInsertTableauDynamique);
-    lancerTest("testcloneTableauDynamique",testcloneTableauDynamique);
+    lancerTest("testcloneTableauDynamique", testcloneTableauDynamique);
     return 0;
 }
