@@ -19,9 +19,39 @@ int* cloneInt(const int* source)
     return res;
 }
 
-void afficherInt(int* i)
+void afficheInt(const int* i)
 {
     printf("%d", *i);
+}
+
+void afficheArray(int n, const void* array[n], void (*afficheur)(const void*))
+{
+    printf("[");
+
+    for (int i = 0; i < n; i++)
+    {
+        (*afficheur)(array[i]);
+
+        if (i < n - 1)
+            printf(", ");
+    }
+
+    printf("]");
+}
+
+void afficheArrayInt(int n, const int array[n])
+{
+    printf("[");
+
+    for (int i = 0; i < n; i ++)
+    {
+        printf("%d", array[i]);
+
+        if (i < n - 1)
+            printf(", ");
+    }
+
+    printf("]");
 }
 
 Instance* genererInstanceAleatoire()

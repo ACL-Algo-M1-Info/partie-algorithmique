@@ -47,10 +47,34 @@ int* cloneInt(const int* source);
  * Affiche un int par adresse.
  * @param i Entier à afficher.
  */
-void afficherInt(int* i);
+void afficheInt(const int* i);
 
+/**
+ * Affiche une liste.
+ * @param n Taille de l'array
+ * @param array Liste à afficher.
+ * @param afficheur Méthode d'affichage de chaque élément.
+ */
+void afficheArray(int n, const void* array[n], void (*afficheur)(const void*));
+
+/**
+ * Affiche une liste d'entiers.
+ * @param n Taille de l'array
+ * @param array Array d'entiers à afficher
+ */
+void afficheArrayInt(int n, const int array[n]);
+
+/**
+ * Génère une instance aléatoirement.
+ * @return Instance générée aléatoirement.
+ */
 Instance* genererInstanceAleatoire();
 
+/**
+ * Génère un tableau d"instances aléatoires.
+ * @param nbInstances Nombre d'instances aléatoires à tester.
+ * @return Le tableau d'instances aléatoires.
+ */
 Instance** genererInstancesAleatoires(int nbInstances);
 
 #endif  // ALGORITHMIE_UTILS_H

@@ -36,12 +36,26 @@ typedef struct _Etat
 Etat* newEtat(int m);
 
 /**
+ * Supprime un état.
+ *
+ * @param etat Etat à supprimer.
+ */
+void deleteEtat(Etat* etat);
+
+/**
  * Créer un nouvel état selon un état existant
  *
  * @param source  l'état depuis lequel on clone
  * @return un nouvel état
  */
 Etat* cloneEtat(Etat* source);
+
+/**
+ * Affiche un état.
+ *
+ * @param etat Etat à afficher.
+ */
+void afficheEtat(Etat *etat);
 
 /**
  *
@@ -60,6 +74,6 @@ void ajouterTacheSurMachine(Etat* etat, int k, int i, int pi, int qi);
  * @param i l'id de la tâche que l'on ajoute
  * @param instance l'instance qui possède la tâche i
  */
-void ajouterTacheSurMachineParInstance(Etat* etat, int k, int i, Instance instance);
+void ajouterTacheSurMachineParInstance(Etat* etat, int k, int i, Instance* instance);
 
 #endif //ETAT_H

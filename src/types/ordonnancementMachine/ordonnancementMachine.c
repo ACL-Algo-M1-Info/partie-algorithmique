@@ -4,11 +4,11 @@
 
 // INCLUSIONS
 
-#include "ordonnancementMachine.h"
-
 #include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
 
+#include "ordonnancementMachine.h"
 #include "../../utils/utils.h"
 
 // FONCTIONS
@@ -24,7 +24,7 @@ OrdonnancementMachine* newOrdonnancementMachine()
     return ordonnancement;
 }
 
-void deleteOrdonnancementMachine(const OrdonnancementMachine* ordonnancement)
+void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement)
 {
     assert(ordonnancement);
 
@@ -49,6 +49,18 @@ OrdonnancementMachine* cloneOrdonnancementMachine(const OrdonnancementMachine* s
     ordonnancement->tabId = cloneTableauDynamique(source->tabId, (void* (*)(void*))cloneInt);
 
     return ordonnancement;
+}
+
+void afficheOrdonnancementMachine(const OrdonnancementMachine* ordonnancement)
+{
+    assert(ordonnancement);
+
+    printf("[");
+
+    for (int i = 0; i < getTailleEffectifTableauDynamique(ordonnancement->tabId); i++)
+        afficheTableauDynamique(ordonnancement->tabId, (void (*)(const void*))afficheInt);
+
+    printf("]");
 }
 
 void ajouterTache(OrdonnancementMachine* ordonnancement, int i, int pi)

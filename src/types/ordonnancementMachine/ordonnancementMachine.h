@@ -37,7 +37,7 @@ OrdonnancementMachine* newOrdonnancementMachine();
  * Supprime un ordonnancement machine.
  * @param ordonnancement Ordonnancement à supprimer.
  */
-void deleteOrdonnancementMachine(const OrdonnancementMachine* ordonnancement);
+void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement);
 
 /**
  * Clone un ordonnancement de machine depuis une source. Le clone est profond,
@@ -46,6 +46,12 @@ void deleteOrdonnancementMachine(const OrdonnancementMachine* ordonnancement);
  * @return Le clone de l'ordonnancement source.
  */
 OrdonnancementMachine* cloneOrdonnancementMachine(const OrdonnancementMachine* source);
+
+/**
+ * Affiche un ordonnancement.
+ * @param ordonnancement Ordonnancement à afficher.
+ */
+void afficheOrdonnancementMachine(const OrdonnancementMachine* ordonnancement);
 
 /**
  * Ajoute une tâche à l'ordonnancement en fin de position.

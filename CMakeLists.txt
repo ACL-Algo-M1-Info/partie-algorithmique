@@ -5,7 +5,7 @@ project(Algorithmie C)
 
 set(CMAKE_C_STANDARD 17)
 
-### FILESYSTEM
+## FILESYSTEM
 
 # Racine
 set(SRC src)
@@ -16,11 +16,11 @@ set(TESTS tests)
 # Types
 set(TYPES ${SRC}/types)
 
-### UTILS
+## UTILS
 
 set(UTILS ${SRC}/utils/utils.c)
 
-### TAD
+## TAD
 
 # TAD Instance
 set(TAD_INSTANCE ${TYPES}/instance/instance.c)
@@ -31,11 +31,11 @@ set(TAD_ORDONNANCEMENT_MACHINE ${TYPES}/ordonnancementMachine/ordonnancementMach
 # TAD TableauDynamique
 set(TAD_TABLEAU_DYNAMIQUE ${TYPES}/tableauDynamique/tableauDynamique.c)
 
-### ALGO
+## ALGO
 
 ### EXECUTABLES ###
 
-# Executable Main
+## Executable Main
 add_executable(Algorithmie ${SRC}/main.c
         ${UTILS}
 
@@ -43,7 +43,27 @@ add_executable(Algorithmie ${SRC}/main.c
         ${TAD_ORDONNANCEMENT_MACHINE}
 )
 
+## Tests
 
+# Tableaux dynamiques
 add_executable(testTableauDynamique ${TESTS}/testTableauDynamique.c
+        ${UTILS}
+
         ${TAD_TABLEAU_DYNAMIQUE}
+)
+
+# Instance
+add_executable(testInstance ${TESTS}/testInstance.c
+        ${UTILS}
+
+        ${TAD_INSTANCE}
+)
+
+# OrdonnancementMachine
+add_executable(testOrdonnancementMachine ${TESTS}/testOrdonnancementMachine.c
+        ${UTILS}
+
+        ${TAD_TABLEAU_DYNAMIQUE}
+        ${TAD_INSTANCE}
+        ${TAD_ORDONNANCEMENT_MACHINE}
 )

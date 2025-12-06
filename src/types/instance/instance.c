@@ -4,20 +4,25 @@
 
 // INCLUSIONS
 
+#include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "instance.h"
+#include "../../utils/utils.h"
 
 // FONCTIONS
 
 Instance* newInstance(int n, int m, int* p, int* q)
 {
     Instance* instance = malloc(sizeof(struct _Instance));
+    assert(instance);
 
     instance->n = n;
     instance->m = m;
     instance->p = malloc(n*sizeof(int));
     instance->q = malloc(n*sizeof(int));
+    assert(instance->p && instance->q);
 
     for (int i = 0; i < n; i++)
     {
@@ -28,7 +33,29 @@ Instance* newInstance(int n, int m, int* p, int* q)
     return instance;
 }
 
+void deleteInstance(Instance* instance)
+{
+    assert(instance);
+
+    free(instance->p);
+    free(instance->q);
+    free(instance);
+}
+
 Instance* cloneInstance(Instance* source)
 {
+    assert(source);
+
     return newInstance(source->n, source->m, source->p, source->q);
+}
+
+void afficheInstance(const Instance* instance)
+{
+    assert(instance);
+
+    printf("Instance[n = %d, m = %d, p = ", instance->n, instance->m);
+    afficheArrayInt(instance->n, instance->p);
+    printf(", q = ");
+    afficheArrayInt(instance->n, instance->q);
+    printf("]");
 }
