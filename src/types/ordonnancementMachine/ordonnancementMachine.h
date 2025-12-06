@@ -5,6 +5,10 @@
 #ifndef ORDONNANCEMENTMACHINE_H
 #define ORDONNANCEMENTMACHINE_H
 
+// INCLUSIONS
+
+#include "../instance/instance.h"
+
 // STRUCTURES
 
 /**
@@ -45,5 +49,12 @@ OrdonnancementMachine* cloneOrdonnancementMachine(OrdonnancementMachine* source)
  * @param pi Durée opératoire de la tâche à ajouter.
  */
 void ajouterTache(int i, int pi);
+
+/**
+ * Ajoute une tâche à l'ordonnancement en fin de position.
+ * @param i Tâche à rajouter dans l'ordonnancement.
+ * @param instance Instance depuis laquelle piocher les informations.
+ */
+void ajouterTacheParInstance(int i, Instance* instance);
 
 #endif //ORDONNANCEMENTMACHINE_H
