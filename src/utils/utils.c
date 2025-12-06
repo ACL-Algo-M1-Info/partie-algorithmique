@@ -16,6 +16,11 @@ int imax(int a, int b)
     return a > b ? a : b;
 }
 
+void deleteInt(void* i)
+{
+    free(i);
+}
+
 int* cloneInt(const int* source)
 {
     int* res = (int*)malloc(sizeof(int));

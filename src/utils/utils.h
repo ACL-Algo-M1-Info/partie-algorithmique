@@ -34,6 +34,13 @@
 int imax(int a, int b);
 
 /**
+ * Supprime un entier
+ *
+ * @param i l'entier que l'on veut supprimer
+ */
+void deleteInt(void* i);
+
+/**
  * Clone un int par adresse. Nécessaire pour le clone de tableau dynamique.
  * @param source Entier à cloner.
  * @return Entier cloné.
