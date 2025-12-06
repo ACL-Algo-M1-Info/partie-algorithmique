@@ -4,11 +4,25 @@
 
 // INCLUSIONS
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "utils.h"
 
 // FONCTIONS
+
+int* cloneInt(const int* source)
+{
+    int* res = (int*)malloc(sizeof(int));
+    *res = *source;
+
+    return res;
+}
+
+void afficherInt(int* i)
+{
+    printf("%d", *i);
+}
 
 Instance* genererInstanceAleatoire()
 {

@@ -1,10 +1,15 @@
 //
 // Created by MEGACHEESEKEBAB on 06/12/2025.
 //
+
+// INCLUSIONS
+
 #include <stdlib.h>
 #include <assert.h>
 
 #include "tableauDynamique.h"
+
+// FONCTIONS
 
 TableauDynamique* newTableauDynamique()
 {

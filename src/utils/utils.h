@@ -36,6 +36,19 @@ inline int imax(int a, int b)
     return a > b ? a : b;
 }
 
+/**
+ * Clone un int par adresse. Nécessaire pour le clone de tableau dynamique.
+ * @param source Entier à cloner.
+ * @return Entier cloné.
+ */
+int* cloneInt(const int* source);
+
+/**
+ * Affiche un int par adresse.
+ * @param i Entier à afficher.
+ */
+void afficherInt(int* i);
+
 Instance* genererInstanceAleatoire();
 
 Instance** genererInstancesAleatoires(int nbInstances);

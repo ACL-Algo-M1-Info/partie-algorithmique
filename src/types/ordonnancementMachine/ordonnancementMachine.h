@@ -8,6 +8,7 @@
 // INCLUSIONS
 
 #include "../instance/instance.h"
+#include "../tableauDynamique//tableauDynamique.h"
 
 // STRUCTURES
 
@@ -16,13 +17,8 @@
  */
 typedef struct _OrdonnancementMachine
 {
-    /** Nombre de tâches. */
-    // TODO à supprimer dès lors qu'on met une dyntable.
-    int taille;
-
     /** Tableau ordonné des IDs des tâches placées sur cette machine. */
-    // TODO à transformer en dyntable.
-    int* tabId;
+    TableauDynamique* tabId;
 
     /** Cmax local à la machine. */
     int cmax;
@@ -41,7 +37,7 @@ OrdonnancementMachine* newOrdonnancementMachine();
  * Supprime un ordonnancement machine.
  * @param ordonnancement Ordonnancement à supprimer.
  */
-void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement);
+void deleteOrdonnancementMachine(const OrdonnancementMachine* ordonnancement);
 
 /**
  * Clone un ordonnancement de machine depuis une source. Le clone est profond,
@@ -49,7 +45,7 @@ void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement);
  * @param source L'ordonnancement duquel puiser les informatons.
  * @return Le clone de l'ordonnancement source.
  */
-OrdonnancementMachine* cloneOrdonnancementMachine(OrdonnancementMachine* source);
+OrdonnancementMachine* cloneOrdonnancementMachine(const OrdonnancementMachine* source);
 
 /**
  * Ajoute une tâche à l'ordonnancement en fin de position.
