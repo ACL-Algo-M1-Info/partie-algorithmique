@@ -47,3 +47,7 @@ add_executable(Algorithmie ${SRC}/main.c
 add_executable(testTableauDynamique ${TESTS}/testTableauDynamique.c
         ${TAD_TABLEAU_DYNAMIQUE}
 )
+
+add_executable(testTriFusion ${TESTS}/testTriFusion.c
+        ${UTILS}
+)
