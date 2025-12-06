@@ -43,7 +43,7 @@ OrdonnancementMachine* cloneOrdonnancementMachine(const OrdonnancementMachine* s
 
     OrdonnancementMachine* ordonnancement = newOrdonnancementMachine();
 
-    ordonnancement->cmax = ordonnancement->cmax;
+    ordonnancement->cmax = source->cmax;
 
     // La dyntable contient des int*, donc on clone selon cloneInt.
     ordonnancement->tabId = cloneTableauDynamique(source->tabId, (void* (*)(void*))cloneInt);
@@ -55,10 +55,9 @@ void afficheOrdonnancementMachine(const OrdonnancementMachine* ordonnancement)
 {
     assert(ordonnancement);
 
-    printf("[");
+    printf("Ordonnancement[cmax = %d, tabId = ", ordonnancement->cmax);
 
-    for (int i = 0; i < getTailleEffectifTableauDynamique(ordonnancement->tabId); i++)
-        afficheTableauDynamique(ordonnancement->tabId, (void (*)(const void*))afficheInt);
+    afficheTableauDynamique(ordonnancement->tabId, (void (*)(const void*))afficheInt);
 
     printf("]");
 }
@@ -68,8 +67,7 @@ void ajouterTache(OrdonnancementMachine* ordonnancement, int i, int pi)
     assert(ordonnancement && i >= 0 && pi >= 0);
 
     // Persistance de l'int. La variable pi actuelle est en stack alloc, il faut qu'elle persiste.
-    int* iPtr = (int*)malloc(sizeof(int));
-    *iPtr = i;
+    int* iPtr = cloneInt(&i);
 
     // Appending dans le tableau.
     insereElementTableauDynamique(ordonnancement->tabId, iPtr);

@@ -11,6 +11,11 @@
 
 // FONCTIONS
 
+int imax(int a, int b)
+{
+    return a > b ? a : b;
+}
+
 int* cloneInt(const int* source)
 {
     int* res = (int*)malloc(sizeof(int));

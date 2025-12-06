@@ -17,15 +17,15 @@ int main(int argc, char *argv[])
 
     Instance* i = newInstance(n, m, p, q);
 
-    printf("Instance: ");
+    printf("Instance:\n");
     afficheInstance(i);
-    printf("\n");
+    printf("\n\n");
 
     Instance *i2 = cloneInstance(i);
 
-    printf("Clone: ");
+    printf("Clone:\n");
     afficheInstance(i2);
-    printf("\n");
+    printf("\n\n");
 
     deleteInstance(i);
     deleteInstance(i2);

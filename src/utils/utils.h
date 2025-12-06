@@ -31,10 +31,7 @@
  * @param b Valeur B.
  * @return Le maximum entre A et B.
  */
-inline int imax(int a, int b)
-{
-    return a > b ? a : b;
-}
+int imax(int a, int b);
 
 /**
  * Clone un int par adresse. Nécessaire pour le clone de tableau dynamique.

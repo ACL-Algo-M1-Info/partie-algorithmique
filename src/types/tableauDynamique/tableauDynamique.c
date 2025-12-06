@@ -113,19 +113,19 @@ void afficheTableauDynamique(const TableauDynamique* tab,
 {
     assert(tab);
 
-    printf("Taille : %d\nTaille effectif %d\n", getTailleTableauDynamique(tab),
+    printf("TableauDynamique[taille = %d, taille_effectif = %d, T = [", getTailleTableauDynamique(tab),
            getTailleEffectifTableauDynamique(tab));
-    printf("[");
 
     for (int i = 0; i < getTailleEffectifTableauDynamique(tab); i++)
     {
         afficheElement(getElementTableauDynamique(tab, i));
+
         if (i < getTailleEffectifTableauDynamique(tab) - 1)
         {
             printf(", ");
         }
     }
-    printf("]\n");
+    printf("]]");
 }
 
 
