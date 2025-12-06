@@ -5,6 +5,24 @@
 #ifndef ALGORITHMIE_UTILS_H
 #define ALGORITHMIE_UTILS_H
 
+// INCLUSIONS
+
+#include "../types/instance/instance.h"
+
+// DEFINES
+
+/** Borne pour le N maximal. */
+#define MAX_N_ALEA_GEN 50
+
+/** Borne pour le m maximal. */
+#define MAX_M_ALEA_GEN 45
+
+/** Borne pour le p(i) maximal. */
+#define MAX_P_ALEA_GEN 10
+
+/** Borne pour le q(i) maximal. */
+#define MAX_Q_ALEA_GEN 10
+
 // FONCTIONS
 
 /**
@@ -17,5 +35,9 @@ inline int imax(int a, int b)
 {
     return a > b ? a : b;
 }
+
+Instance* genererInstanceAleatoire();
+
+Instance** genererInstancesAleatoires(int nbInstances);
 
 #endif  // ALGORITHMIE_UTILS_H
