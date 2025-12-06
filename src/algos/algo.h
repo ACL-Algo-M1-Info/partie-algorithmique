@@ -5,6 +5,27 @@
 #ifndef ALGO_H
 #define ALGO_H
 
-void test();
+// INCLUSIONS
+
+#include "../types/instance/instance.h"
+
+// FONCTIONS
+
+/* Exo 2 */
+
+// TODO entête algo exo 2
+
+/* Exo 3 */
+
+/**
+ * Modifie l'instance passée en paramètres pour appliquer le traitement du
+ * FPTAS.
+ * @param instance Instance à modifer.
+ */
+void modifierInstanceFPTAS(Instance* instance);
+
+/* Exo 4 */
+
+// TODO entête algo exo 4
 
 #endif //ALGO_H
