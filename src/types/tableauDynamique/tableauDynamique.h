@@ -96,13 +96,13 @@ void setTailleTableauDynamique(TableauDynamique* tab,
  * Incrémente le nombre de case utilisée du tableau de 1
  * @param tab
  */
-void incrementeTailleEffectifTableauDynamique( TableauDynamique* tab);
+void incrementeTailleEffectifTableauDynamique(TableauDynamique* tab);
 
 /**
  * Décrémente le nombre de case utilisée du tableau de 1
  * @param tab
  */
-void decrementeTailleEffectifTableauDynamique( TableauDynamique* tab);
+void decrementeTailleEffectifTableauDynamique(TableauDynamique* tab);
 
 /**
  * Si deleteElement n'est pas null alors il libérera aussi les éléments du tableau T
