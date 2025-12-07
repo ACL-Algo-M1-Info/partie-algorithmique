@@ -128,6 +128,22 @@ void afficheTableauDynamique(const TableauDynamique* tab,
     printf("]]");
 }
 
+int tableauxDynamiquesEgaux(const TableauDynamique* a, const TableauDynamique* b, int (*comp)(const void*, const void*))
+{
+    assert(a && b && comp);
+
+    // Tailles inégales
+    if (getTailleEffectifTableauDynamique(a) != getTailleEffectifTableauDynamique(b))
+        return 0;
+
+    // Egalité par elm
+    for (int i = 0; i < getTailleEffectifTableauDynamique(a); i++)
+        if ((*comp)(getElementTableauDynamique(a, i), getElementTableauDynamique(b, i)) == 0)
+            return 0;
+
+    return 1;
+}
+
 
 /**
  * Double la taille du tableau T
@@ -154,7 +170,7 @@ void insereElementTableauDynamique(TableauDynamique* tab, void* element)
 }
 
 TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,
-                                        void*(*cloneurElement)(void*))
+                                        void*(*cloneurElement)(const void*))
 {
     assert(tab && tab->T);
 

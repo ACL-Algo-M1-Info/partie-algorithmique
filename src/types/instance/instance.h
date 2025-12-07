@@ -40,7 +40,7 @@ Instance* newInstance(int n, int m, double *p, double *q);
  *
  * @param instance L'instance à supprimer.
  */
-void deleteInstance(Instance* instance);
+void deleteInstance(void* instance);
 
 /**
  * Clone une instance
@@ -48,13 +48,22 @@ void deleteInstance(Instance* instance);
  * @param source  l'instance à cloner
  * @return l'instance clonée
  */
-Instance* cloneInstance(Instance* source);
+void* cloneInstance(const void* source);
 
 /**
  * Affiche une instance.
  *
  * @param instance Instance à afficher.
  */
-void afficheInstance(const Instance* instance);
+void afficheInstance(const void* instance);
+
+/**
+ * Détermine si deux instances sont égales.
+ *
+ * @param a Instance A à vérifier
+ * @param b Instance B à vérifier
+ * @return 1 si les instances sont égales, 0 sinon.
+ */
+int instancesEgales(const void* a, const void* b);
 
 #endif //INSTANCE_H

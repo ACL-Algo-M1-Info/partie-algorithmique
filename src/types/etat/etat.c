@@ -32,44 +32,68 @@ Etat* newEtat(int m)
     return e;
 }
 
-void deleteEtat(Etat* etat)
+void deleteEtat(void* etat)
 {
     assert(etat);
+    Etat* e = etat;
 
     // On free tout le contenu au préalable.
-    for (int i = 0; i < etat->m; i++)
-        deleteOrdonnancementMachine(etat->ordonnancements[i]);
+    for (int i = 0; i < e->m; i++)
+        deleteOrdonnancementMachine(e->ordonnancements[i]);
 
-    free(etat->ordonnancements);
+    free(e->ordonnancements);
     free(etat);
 }
 
-Etat* cloneEtat(Etat* source)
+void* cloneEtat(const void* source)
 {
     assert(source);
+    const Etat* src = source;
 
     Etat* e = malloc(sizeof(struct _Etat));
     assert(e);
 
-    e->m = source->m;
-    e->lmax = source->lmax;
-    e->ordonnancements = malloc(source->m*sizeof(OrdonnancementMachine*));
+    e->m = src->m;
+    e->lmax = src->lmax;
+    e->ordonnancements = malloc(src->m*sizeof(OrdonnancementMachine*));
     assert(e->ordonnancements);
 
-    for (int i = 0; i < source->m; i++)
+    for (int i = 0; i < src->m; i++)
     {
         // Clone de l'ordonnancement i
-        e->ordonnancements[i] = cloneOrdonnancementMachine(source->ordonnancements[i]);
+        e->ordonnancements[i] = cloneOrdonnancementMachine(src->ordonnancements[i]);
     }
 
     return e;
 }
 
-void afficheEtat(Etat *etat)
+void afficheEtat(const void* etat)
 {
-    printf("Etat[Lmax = %.2lf, m = %d, ordonnancements = ", etat->lmax, etat->m);
-    afficheArray(etat->m, (const void**)etat->ordonnancements, (void (*)(const void*))afficheOrdonnancementMachine);
+    assert(etat);
+    const Etat* e = etat;
+
+    printf("Etat[Lmax = %.2lf, m = %d, ordonnancements = ", e->lmax, e->m);
+    afficheArray(e->m, (const void**)e->ordonnancements, (void (*)(const void*))afficheOrdonnancementMachine);
     printf("]");
+}
+
+int etatsEgaux(const void* a, const void* b)
+{
+    assert(a && b);
+
+    const Etat* i = a;
+    const Etat* j = b;
+
+    // Egalité des lmax
+    if (dblcmp(i->lmax, j->lmax) == 0)
+        return 0;
+
+    // Egalité des m
+    if (i->m != j->m)
+        return 0;
+
+    // Egalité des tableaux d'ordonnancement.
+    return arraysEgales(i->m, (const void**)i->ordonnancements, (const void**)j->ordonnancements, ordonnancementsMachinesEgaux);
 }
 
 void ajouterTacheSurMachine(Etat* etat, int k, int i, double pi, double qi)

@@ -121,7 +121,7 @@ void deleteTableauDynamique(TableauDynamique* tab,
  * @return le clone de tab
  */
 TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,
-                                        void*(*cloneurElement)(void*));
+                                        void*(*cloneurElement)(const void*));
 /**
  * Affiche les éléments du tableau dynamique tab.
  * les données de chaque case du tableau est affichée grâce au pointeur de fonction afficheElement
@@ -130,6 +130,15 @@ TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,
  */
 void afficheTableauDynamique(const TableauDynamique* tab,
                              void (*afficheElement)(const void*));
+
+/**
+ * Compare deux tableaux dynamiques.
+ * @param a Tableau a.
+ * @param b Tableau b.
+ * @param comp Fonction de comparaison entre les éléments.
+ * @return 1 si égaux, 0 sinon.
+ */
+int tableauxDynamiquesEgaux(const TableauDynamique* a, const TableauDynamique* b, int (*comp)(const void*, const void*));
 
 /**
  * Insère à la première position disponible un nouvel élément.

@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     printf("Clone:\n");
     afficheEtat(e2);
     printf("\n\n");
+    assert(etatsEgaux(e, e2));
 
     ajouterTacheSurMachine(e, 1, 2, 4, 7);
 
@@ -36,6 +37,7 @@ int main(int argc, char *argv[])
     printf("vs clone:\n");
     afficheEtat(e2);
     printf("\n\n");
+    assert(!etatsEgaux(e, e2));
 
     deleteEtat(e);
     deleteEtat(e2);

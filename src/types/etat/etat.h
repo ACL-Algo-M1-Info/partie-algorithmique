@@ -40,7 +40,7 @@ Etat* newEtat(int m);
  *
  * @param etat Etat à supprimer.
  */
-void deleteEtat(Etat* etat);
+void deleteEtat(void* etat);
 
 /**
  * Créer un nouvel état selon un état existant
@@ -48,14 +48,22 @@ void deleteEtat(Etat* etat);
  * @param source  l'état depuis lequel on clone
  * @return un nouvel état
  */
-Etat* cloneEtat(Etat* source);
+void* cloneEtat(const void* source);
 
 /**
  * Affiche un état.
  *
  * @param etat Etat à afficher.
  */
-void afficheEtat(Etat *etat);
+void afficheEtat(const void* etat);
+
+/**
+ * Compare des états.
+ * @param a Etat a.
+ * @param b Etat b.
+ * @return 1 si égaux, 0 sinon.
+ */
+int etatsEgaux(const void* a, const void* b);
 
 /**
  *
