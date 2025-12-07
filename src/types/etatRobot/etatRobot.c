@@ -32,43 +32,48 @@ EtatRobot* newEtatRobot(int m)
     return e;
 }
 
-void deleteEtatRobot(EtatRobot* etat)
+void deleteEtatRobot(void* etat)
 {
     assert(etat);
+    EtatRobot* e = etat;
 
     // On free tout le contenu au préalable.
-    for (int i = 0; i < etat->m; i++)
-        deleteOrdonnancementMachine(etat->ordonnancements[i]);
+    for (int i = 0; i < e->m; i++)
+        deleteOrdonnancementMachine(e->ordonnancements[i]);
 
-    free(etat->ordonnancements);
+    free(e->ordonnancements);
     free(etat);
 }
 
-EtatRobot* cloneEtatRobot(EtatRobot* source)
+void* cloneEtatRobot(void* source)
 {
     assert(source);
+    EtatRobot* src = source;
 
     EtatRobot* e = malloc(sizeof(struct _EtatRobot));
     assert(e);
 
-    e->m = source->m;
-    e->cMax = source->cMax;
-    e->ordonnancements = malloc(source->m*sizeof(OrdonnancementMachine*));
+    e->m = src->m;
+    e->cMax = src->cMax;
+    e->ordonnancements = malloc(src->m*sizeof(OrdonnancementMachine*));
     assert(e->ordonnancements);
 
-    for (int i = 0; i < source->m; i++)
+    for (int i = 0; i < src->m; i++)
     {
         // Clone de l'ordonnancement i
-        e->ordonnancements[i] = cloneOrdonnancementMachine(source->ordonnancements[i]);
+        e->ordonnancements[i] = cloneOrdonnancementMachine(src->ordonnancements[i]);
     }
 
     return e;
 }
 
-void afficheEtatRobot(EtatRobot *etat)
+void afficheEtatRobot(void* etat)
 {
-    printf("Etat[Cmax = %.2lf, m = %d, ordonnancements = ", etat->cMax, etat->m);
-    afficheArray(etat->m, (const void**)etat->ordonnancements, (void (*)(const void*))afficheOrdonnancementMachine);
+    assert(etat);
+    EtatRobot* e = etat;
+
+    printf("Etat[Cmax = %.2lf, m = %d, ordonnancements = ", e->cMax, e->m);
+    afficheArray(e->m, (const void**)e->ordonnancements, (void (*)(const void*))afficheOrdonnancementMachine);
     printf("]");
 }
 

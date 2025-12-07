@@ -42,7 +42,7 @@ EtatRobot* newEtatRobot(int m);
  *
  * @param etat Etat à supprimer.
  */
-void deleteEtatRobot(EtatRobot* etat);
+void deleteEtatRobot(void* etat);
 
 /**
  * Créer un nouvel état selon un état existant
@@ -50,14 +50,14 @@ void deleteEtatRobot(EtatRobot* etat);
  * @param source  l'état depuis lequel on clone
  * @return un nouvel état
  */
-EtatRobot* cloneEtatRobot(EtatRobot* source);
+void* cloneEtatRobot(void* source);
 
 /**
  * Affiche un état.
  *
  * @param etat Etat à afficher.
  */
-void afficheEtatRobot(EtatRobot *etat);
+void afficheEtatRobot(void* etat);
 
 /**
  *
