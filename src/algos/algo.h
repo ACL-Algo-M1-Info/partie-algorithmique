@@ -12,8 +12,23 @@
 // FONCTIONS
 
 /* Exo 2 */
-
+/**
+ * Algo exact
+ * Génére toutes les combinaisons de placement possible d'ordonnancement pour une instance de n tâche et m machine
+ * Retourne la solution avec le lmax minimal (ne retourne pas l'état qui donne ce lmax minimal)
+ * @param instance
+ * @return le lmax minimal
+ */
 double algoProgrammationDynamique(Instance* instance);
+/**
+ * Algo exact
+ * Génére toutes les combinaisons de placement possible d'ordonnancement pour une instance de n tâche et m machine
+ * Mais cette fois-ci, retire les états dominés
+ * Retourne la solution avec le lmax minimal (ne retourne pas l'état qui donne ce lmax minimal)
+ * @param instance
+ * @return
+ */
+double algoProgrammationDynamiqueSimplifie(Instance* instance);
 /* Exo 3 */
 
 /**

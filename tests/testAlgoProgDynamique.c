@@ -5,6 +5,8 @@
 
 #include <iso646.h>
 #include <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "types/etat/etat.h"
 #include "types/instance/instance.h"
@@ -21,6 +23,7 @@ void afficheEtatUltime(const void *etat)
 }
 void testTout()
 {
+
     int m = 2;
     int n = 3;
     double p[] = {3,7,4};
@@ -33,8 +36,9 @@ void testTout()
     // insereElementTableauDynamique(E,etat);
     // afficheTableauDynamique(E,afficheEtat);
 
-    double minimiserLmax = algoProgrammationDynamique(instance);
-    printf("voici %lf",minimiserLmax);
+    // double minimiserLmax = algoProgrammationDynamique(instance);
+    double minimiserLmaxSimplifie = algoProgrammationDynamiqueSimplifie(instance);
+    printf("\nlmax minmal de l'instance : %lf",minimiserLmaxSimplifie);
 }
 int main()
 {

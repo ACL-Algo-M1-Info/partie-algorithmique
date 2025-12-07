@@ -44,7 +44,7 @@ void* cloneOrdonnancementMachine(const void* source)
     ordonnancement->cmax = src->cmax;
 
     // La dyntable contient des int*, donc on clone selon cloneInt.
-    ordonnancement->tabId = cloneTableauDynamique(src->tabId, (void* (*)(void*))cloneInt);
+    ordonnancement->tabId = cloneTableauDynamique(src->tabId, cloneInt);
 
     return ordonnancement;
 }
@@ -54,9 +54,9 @@ void afficheOrdonnancementMachine(const void* ordonnancement)
     assert(ordonnancement);
     const OrdonnancementMachine* o = ordonnancement;
 
-    printf("Ordonnancement[cmax = %.2lf, tabId = ", o->cmax);
+    printf("\nOrdonnancement [cmax = %.2lf, tabId = ", o->cmax);
 
-    afficheTableauDynamique(o->tabId, (void (*)(const void*))afficheInt);
+    afficheTableauDynamique(o->tabId, (void (*)(const void*))afficheInt,"id ");
 
     printf("]");
 }

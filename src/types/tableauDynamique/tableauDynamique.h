@@ -127,9 +127,10 @@ TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,
  * les données de chaque case du tableau est affichée grâce au pointeur de fonction afficheElement
  * @param tab
  * @param afficheElement
+ * @param nomStructure
  */
 void afficheTableauDynamique(const TableauDynamique* tab,
-                             void (*afficheElement)(const void*));
+                             void (*afficheElement)(const void*),const char * nomStructure);
 
 /**
  * Compare deux tableaux dynamiques.
@@ -148,5 +149,19 @@ int tableauxDynamiquesEgaux(const TableauDynamique* a, const TableauDynamique* b
  */
 void insereElementTableauDynamique(TableauDynamique* tab, void* element);
 
+/**
+ * swap deux elements du tableau
+ * @param tab
+ * @param pos1
+ * @param pos2
+ */
+void swapElementTableauDynamique(TableauDynamique* tab, unsigned int pos1,
+                                 unsigned int pos2);
 
+/**
+ * Retire et retourne le dernier element du tableau
+ * @param tab
+ * @return le dernier element du tableau
+ */
+void* retireElementTableauDynamique(TableauDynamique* tab);
 #endif //ALGORITHMIE_TABLEAUDYNAMIQUE_H

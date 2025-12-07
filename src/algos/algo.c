@@ -14,22 +14,6 @@
 /* Exo 2 */
 
 
-double minDeLensemble(const TableauDynamique* E)
-{
-    Etat* e = getElementTableauDynamique(E, 0);
-    double min = e->lmax;
-
-    for (int i = 1; i < getTailleEffectifTableauDynamique(E); i++)
-    {
-        Etat* ei = getElementTableauDynamique(E, i);
-        if (min > ei->lmax)
-        {
-            min = ei->lmax;
-        }
-    }
-    return min;
-}
-
 double algoProgrammationDynamique(Instance* instance)
 {
     triJacksonQ(instance);
@@ -61,7 +45,43 @@ double algoProgrammationDynamique(Instance* instance)
         deleteTableauDynamique(E, deleteEtat);
         E = cloneTableauDynamique(Ej, cloneEtat);
     }
-    afficheTableauDynamique(E,afficheEtat);
+    afficheTableauDynamique(E, afficheEtat, "Ensemble\n");
+    return minDeLensemble(E);
+}
+
+double algoProgrammationDynamiqueSimplifie(Instance* instance)
+{
+    triJacksonQ(instance);
+    int nbMachine = instance->m;
+    int nbTache = instance->n;
+
+    Etat* etat = newEtat(nbMachine);
+    TableauDynamique* E = newTableauDynamique();
+    insereElementTableauDynamique(E, etat);
+
+    //Pour chaque tâche
+    for (int j = 0; j < nbTache; j++)
+    {
+        TableauDynamique* Ej = newTableauDynamique();
+
+        //Pour chaque etat dans E
+        for (int e = 0; e < getTailleEffectifTableauDynamique(E); e++)
+        {
+            Etat* ei = getElementTableauDynamique(E, e);
+            //Pour chaque machine
+            for (int k = 0; k < nbMachine; k++)
+            {
+                Etat* etatEvolue = cloneEtat(ei);
+                ajouterTacheSurMachine(etatEvolue, k, j, instance->p[j],
+                                       instance->q[j]);
+                insereElementTableauDynamique(Ej, etatEvolue);
+            }
+        }
+        deleteTableauDynamique(E, deleteEtat);
+        supprimerDoublon(Ej);
+        E = cloneTableauDynamique(Ej, cloneEtat);
+    }
+    afficheTableauDynamique(E, afficheEtat, "Ensemble\n");
     return minDeLensemble(E);
 }
 

@@ -109,11 +109,13 @@ void deleteTableauDynamique(TableauDynamique* tab,
 }
 
 void afficheTableauDynamique(const TableauDynamique* tab,
-                             void (*afficheElement)(const void*))
+                             void (*afficheElement)(const void*),
+                             const char* nomStructure)
 {
     assert(tab);
 
-    printf("TableauDynamique[taille = %d, taille_effectif = %d, T = [", getTailleTableauDynamique(tab),
+    printf("%s[taille = %d, taille_effectif = %d, T = [", nomStructure,
+           getTailleTableauDynamique(tab),
            getTailleEffectifTableauDynamique(tab));
 
     for (int i = 0; i < getTailleEffectifTableauDynamique(tab); i++)
@@ -128,17 +130,21 @@ void afficheTableauDynamique(const TableauDynamique* tab,
     printf("]]");
 }
 
-int tableauxDynamiquesEgaux(const TableauDynamique* a, const TableauDynamique* b, int (*comp)(const void*, const void*))
+int tableauxDynamiquesEgaux(const TableauDynamique* a,
+                            const TableauDynamique* b,
+                            int (*comp)(const void*, const void*))
 {
     assert(a && b && comp);
 
     // Tailles inégales
-    if (getTailleEffectifTableauDynamique(a) != getTailleEffectifTableauDynamique(b))
+    if (getTailleEffectifTableauDynamique(a) !=
+        getTailleEffectifTableauDynamique(b))
         return 0;
 
     // Egalité par elm
     for (int i = 0; i < getTailleEffectifTableauDynamique(a); i++)
-        if ((*comp)(getElementTableauDynamique(a, i), getElementTableauDynamique(b, i)) == 0)
+        if ((*comp)(getElementTableauDynamique(a, i),
+                    getElementTableauDynamique(b, i)) == 0)
             return 0;
 
     return 1;
@@ -157,6 +163,14 @@ static void dedoubleTaille(TableauDynamique* tab)
     tab->taille *= 2;
 }
 
+static void diviseTaille(TableauDynamique* tab)
+{
+    assert(tab);
+    tab->T = realloc(tab->T, (tab->taille / 2) * sizeof(void*));
+    assert(tab->T);
+    tab->taille /= 2;
+}
+
 void insereElementTableauDynamique(TableauDynamique* tab, void* element)
 {
     assert(tab && tab->T);
@@ -167,6 +181,36 @@ void insereElementTableauDynamique(TableauDynamique* tab, void* element)
     setElementTableauDynamique(tab, getTailleEffectifTableauDynamique(tab),
                                element);
     incrementeTailleEffectifTableauDynamique(tab);
+}
+
+void* retireElementTableauDynamique(TableauDynamique* tab)
+{
+    assert(tab);
+    assert(tab->T);
+    void* element = getElementTableauDynamique(
+        tab, getTailleEffectifTableauDynamique(tab) - 1);
+    setElementTableauDynamique(tab, getTailleEffectifTableauDynamique(tab) - 1,
+                               NULL);
+    decrementeTailleEffectifTableauDynamique(tab);
+    if (tableauDynamiqueEstPresqueVide(tab))
+    {
+        diviseTaille(tab);
+    }
+    return element;
+}
+
+void swapElementTableauDynamique(TableauDynamique* tab, unsigned int pos1,
+                                 unsigned int pos2)
+{
+    assert(tab);
+    assert(
+        pos1 < getTailleEffectifTableauDynamique(tab) && pos2 <
+        getTailleEffectifTableauDynamique(tab));
+
+    void* aux = getElementTableauDynamique(tab, pos1);
+    setElementTableauDynamique(tab, pos1,
+                               getElementTableauDynamique(tab, pos2));
+    setElementTableauDynamique(tab, pos2, aux);
 }
 
 TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,

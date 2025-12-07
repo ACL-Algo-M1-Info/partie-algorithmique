@@ -8,7 +8,8 @@
 // INCLUSIONS
 
 #include "../types/instance/instance.h"
-
+#include "../types/tableauDynamique/tableauDynamique.h"
+#include "../types/etat/etat.h"
 // DEFINES
 
 /** Facteur d'erreur pour considérer l'égalité de deux doubles. */
@@ -154,4 +155,39 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
  */
 void triJacksonQ(Instance* i);
 
+/**
+ * retourne le lmax minimal de l'ensemble d'états E
+ * @param E
+ * @return
+ */
+double minDeLensemble(const TableauDynamique* E);
+
+/**
+ * Compare le cmax de deux machines
+ * @param a
+ * @param b
+ * @return
+ */
+int ordoEstPlusGrandQue(const void* a, const void* b);
+
+/**
+ * Trie les machines en fonction de leur cmax
+ * @param e
+ */
+void trierMachineDeEtat(Etat* e);
+
+/**
+ * Sous hypothèse que les ordos sont déjà triés !!!!!!!
+ * @param a
+ * @param b
+ * @return vrai si a domine b
+ */
+int estDomine(const Etat* a, const Etat* b);
+
+/**
+ * Supprime les etats doublons de l'ensemble E
+ * c'est à dire ceux qui sont dominés par un autre etat de E
+ * @param E
+ */
+void supprimerDoublon(TableauDynamique* E);
 #endif  // ALGORITHMIE_UTILS_H

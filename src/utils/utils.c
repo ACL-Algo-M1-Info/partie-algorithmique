@@ -244,3 +244,128 @@ void triJacksonQ(Instance* i)
 
 
 
+
+double minDeLensemble(const TableauDynamique* E)
+{
+    Etat* e = getElementTableauDynamique(E, 0);
+    double min = e->lmax;
+
+    for (int i = 1; i < getTailleEffectifTableauDynamique(E); i++)
+    {
+        Etat* ei = getElementTableauDynamique(E, i);
+        if (min > ei->lmax)
+        {
+            min = ei->lmax;
+        }
+    }
+    return min;
+}
+
+int ordoEstPlusGrandQue(const void* a, const void* b)
+{
+    OrdonnancementMachine* o1 = *(OrdonnancementMachine**)a;
+    OrdonnancementMachine* o2 = *(OrdonnancementMachine**)b;
+
+    if (o1->cmax < o2->cmax) return -1;
+    if (o1->cmax > o2->cmax) return 1;
+    return 0;
+}
+
+void trierMachineDeEtat(Etat* e)
+{
+    qsort(e->ordonnancements, e->m, sizeof(OrdonnancementMachine*),
+          ordoEstPlusGrandQue);
+}
+
+/**
+ * Sous hypothèse que les ordos sont déjà triés !!!!!!!
+ * @param a
+ * @param b
+ * @return vrai si a domine b
+ */
+int estDomine(const Etat* a, const Etat* b)
+{
+    if (a->lmax > b->lmax)
+    {
+        return 0; // a domine pas b
+    }
+    //Pour chacune des machines de a et b, comme elles sont triées, si l'une a un cmax plus grand qu'une des machine de a c'est terminé, on sait que b domine
+    for (int k = 0; k < a->m; k++)
+    {
+        if (a->ordonnancements[k]->cmax > b->ordonnancements[k]->cmax)
+        {
+            return 0;
+        }
+    }
+    //si a domine b
+    return 1;
+}
+
+void supprimerDoublon(TableauDynamique* E)
+{
+    int nbEtat = getTailleEffectifTableauDynamique(E);
+    if (nbEtat == 0) return;
+
+    for (int i = 0; i < nbEtat; i++)
+    {
+        Etat* e = getElementTableauDynamique(E, i);
+        trierMachineDeEtat(e);
+    }
+
+    int* aSupprimer = calloc(nbEtat, sizeof(int));
+    //Pour un etat donné
+    for (int i = 0; i < nbEtat; i++)
+    {
+        if (aSupprimer[i])
+        {
+            continue;
+        }
+
+        Etat* ei = getElementTableauDynamique(E, i);
+        //Pour chaque autre état dans l'ensemble, on le compare aux autres
+        for (int j = 0; j < nbEtat; j++)
+        {
+            if (i == j || aSupprimer[j])
+            {
+                continue;
+            }
+
+            Etat* ej = getElementTableauDynamique(E, j);
+
+            if (estDomine(ei, ej))
+            {
+                if (estDomine(ej,ei))
+                {
+                    //C'est pour éviter de supprimer les deux états.. car quand on va boucler ex [0,14] 20 pense dominé [14,0] 20 et réciproquement..
+                    //donc je supprime uniquement celui avec le plus grand index (j >i)
+                    if (j>i)
+                    {
+                        aSupprimer[j]=1;
+                    }
+                }
+                else
+                {
+                    aSupprimer[j]=1;
+                }
+            }
+        }
+
+        for (int i = nbEtat - 1; i >= 0; i--)
+        {
+            if (aSupprimer[i])
+            {
+                //Pour le supprimer je le mets à la dernière case pour le faire dépop avec la méthode TAD
+                unsigned int dernierIndice =
+                    getTailleEffectifTableauDynamique(E) - 1;
+                if (i != dernierIndice)
+                {
+                    swapElementTableauDynamique(E, i, dernierIndice);
+                }
+
+                Etat* e = retireElementTableauDynamique(E);
+                deleteEtat(e);
+            }
+        }
+    }
+    free(aSupprimer);
+}

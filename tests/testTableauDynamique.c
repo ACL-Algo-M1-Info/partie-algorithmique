@@ -22,7 +22,7 @@ void afficheEntier(const void* i)
     }
 }
 
-void* cloneEntier(void* i)
+void* cloneEntier(const void* i)
 {
     int* entierAcloner = (int*)i;
     int* clone = malloc(sizeof(int));
