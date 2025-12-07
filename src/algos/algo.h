@@ -20,8 +20,9 @@ double algoProgrammationDynamique(Instance* instance);
  * Modifie l'instance passée en paramètres pour appliquer le traitement du
  * FPTAS.
  * @param instance Instance à modifer.
+ * @param e Epsilon à fixer.
  */
-void modifierInstanceFPTAS(Instance* instance);
+void modifierInstanceFPTAS(Instance* instance, double e);
 
 /* Exo 4 */
 

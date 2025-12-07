@@ -107,6 +107,14 @@ void afficheArrayInt(int n, const int array[n]);
 int arraysIntEgales(int n, const int a[n], const int b[n]);
 
 /**
+ * Retrouve l'entier maximal dans l'array. L'array ne doit pas être vide.
+ * @param n Taille de l'array > 0.
+ * @param a Array.
+ * @return L'entier max dans l'array.
+ */
+int maxArrayInt(int n, const int a[n]);
+
+/**
  * Affiche une liste de double
  * @param n la taille de l'array
  * @param array le tableau de doubles à afficher
@@ -121,6 +129,14 @@ void afficheArrayDouble(int n, const double array[n]);
  * @return 1 si égales, 0 sinon.
  */
 int arraysDoubleEgales(int n, const double a[n], const double b[n]);
+
+/**
+ * Retrouve le double maximal dans l'array. L'array ne doit pas être vide.
+ * @param n Taille de l'array > 0.
+ * @param a Array.
+ * @return Le double max dans l'array.
+ */
+double maxArrayDouble(int n, const double a[n]);
 
 /**
  * Génère une instance aléatoirement.
@@ -153,5 +169,13 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
  * @param i l'instance où l'on veut appliquer l'ordre
  */
 void triJacksonQ(Instance* i);
+
+/**
+ * Rastérise un nombre pour qu'il s'aligne sur une échelle précise. Emploie un arrondi inférieur.
+ * @param k Nombre à rastériser.
+ * @param facteur Facteur de rastérisation.
+ * @return Nombre k rastérisé sur la grille selon facteur.
+ */
+double rasteriserInferieur(double k, double facteur);
 
 #endif  // ALGORITHMIE_UTILS_H

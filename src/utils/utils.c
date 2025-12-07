@@ -112,6 +112,18 @@ int arraysIntEgales(int n, const int a[n], const int b[n])
     return 1;
 }
 
+int maxArrayInt(int n, const int a[n])
+{
+    assert(n > 0 && a);
+
+    int res = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] > res)
+            res = a[i];
+
+    return res;
+}
+
 void afficheArrayDouble(int n, const double array[n])
 {
     assert(n >= 0 && array);
@@ -139,6 +151,18 @@ int arraysDoubleEgales(int n, const double a[n], const double b[n])
     return 1;
 }
 
+double maxArrayDouble(int n, const double a[n])
+{
+    assert(n > 0 && a);
+
+    double res = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] > res)
+            res = a[i];
+
+    return res;
+}
+
 Instance* genererInstanceAleatoire()
 {
     // Génération aléatoire.
@@ -153,10 +177,10 @@ Instance* genererInstanceAleatoire()
     for (int i = 0; i < randN; i++)
     {
         // Pour p(i)
-        randP[i] = rand() % MAX_P_ALEA_GEN;
+        randP[i] = 1 + rand() % (MAX_P_ALEA_GEN - 1);
 
         // Pour q(i)
-        randQ[i] = rand() % MAX_Q_ALEA_GEN;
+        randQ[i] = 1 + rand() % (MAX_Q_ALEA_GEN - 1);
     }
 
     return newInstance(randN, randM, randP, randQ);
@@ -242,5 +266,8 @@ void triJacksonQ(Instance* i)
     triFusionDecroissant(0, i->n-1, i, tq, tp);
 }
 
-
-
+double rasteriserInferieur(double k, double facteur)
+{
+    // La formule est floor(k / facteur) * facteur pour la rastérisation
+    return floor(k / facteur) * facteur;
+}

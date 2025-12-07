@@ -5,6 +5,7 @@
 // INCLUSIONS
 #include <assert.h>
 #include <stdlib.h>
+
 #include "algo.h"
 #include "types/etat/etat.h"
 #include "utils/utils.h"
@@ -67,9 +68,20 @@ double algoProgrammationDynamique(Instance* instance)
 
 /* Exo 3 */
 
-void modifierInstanceFPTAS(Instance* instance)
+void modifierInstanceFPTAS(Instance* instance, double e)
 {
-    // TODO corps algo exo 3
+    // On applique la formule de rastérisation selon delta.
+    // Delta vaut (e*qmax)/(N+1).
+
+    double qmax = obtenirQmax(instance);
+    double delta = (e * qmax) / (instance->n + 1);
+
+    // Application à chaque p(i) et q(i) de la rastérisation inférieure sur delta.
+    for (int i = 0; i < instance->n; i++)
+    {
+        instance->p[i] = rasteriserInferieur(instance->p[i], delta);
+        instance->q[i] = rasteriserInferieur(instance->q[i], delta);
+    }
 }
 
 /* Exo 4 */
