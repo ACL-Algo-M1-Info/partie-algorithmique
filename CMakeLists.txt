@@ -55,6 +55,10 @@ target_link_libraries(testEtat PRIVATE CORE)
 add_executable(testJackson ${TESTS}/testJackson.c)
 target_link_libraries(testJackson PRIVATE CORE)
 
+# AlgoProgDynamique
+
+add_executable(testAlgoProgDynamique ${TESTS}/testAlgoProgDynamique.c)
+target_link_libraries(testAlgoProgDynamique PRIVATE CORE)
 # Génération aléatoire
 add_executable(testGenerationAleatoire ${TESTS}/testGenerationAleatoire.c)
 target_link_libraries(testGenerationAleatoire PRIVATE CORE)

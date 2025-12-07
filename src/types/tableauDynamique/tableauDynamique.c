@@ -170,7 +170,7 @@ void insereElementTableauDynamique(TableauDynamique* tab, void* element)
 }
 
 TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,
-                                        void*(*cloneurElement)(void*))
+                                        void*(*cloneurElement)(const void*))
 {
     assert(tab && tab->T);
 

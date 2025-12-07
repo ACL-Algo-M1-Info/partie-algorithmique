@@ -13,8 +13,7 @@
 
 /* Exo 2 */
 
-// TODO entête algo exo 2
-
+double algoProgrammationDynamique(Instance* instance);
 /* Exo 3 */
 
 /**

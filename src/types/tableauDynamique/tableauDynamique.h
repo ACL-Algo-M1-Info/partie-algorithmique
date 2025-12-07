@@ -121,7 +121,7 @@ void deleteTableauDynamique(TableauDynamique* tab,
  * @return le clone de tab
  */
 TableauDynamique* cloneTableauDynamique(const TableauDynamique* tab,
-                                        void*(*cloneurElement)(void*));
+                                        void*(*cloneurElement)(const void*));
 /**
  * Affiche les éléments du tableau dynamique tab.
  * les données de chaque case du tableau est affichée grâce au pointeur de fonction afficheElement
