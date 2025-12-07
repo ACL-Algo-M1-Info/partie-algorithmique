@@ -45,13 +45,13 @@ void deleteInt(void* i);
  * @param source Entier à cloner.
  * @return Entier cloné.
  */
-int* cloneInt(const int* source);
+void* cloneInt(const void* source);
 
 /**
  * Affiche un int par adresse.
  * @param i Entier à afficher.
  */
-void afficheInt(const int* i);
+void afficheInt(const void* i);
 
 /**
  * Affiche une liste.
@@ -62,6 +62,16 @@ void afficheInt(const int* i);
 void afficheArray(int n, const void* array[n], void (*afficheur)(const void*));
 
 /**
+ * Détermine si deux arrays sont égales.
+ * @param n Taille des deux arrays.
+ * @param a Array a.
+ * @param b Array b.
+ * @param comp Méthode de comparaison des deux arrays.
+ * @return 1 si égales, 0 sinon.
+ */
+int arrayEgales(int n, const void* a[n], const void* b[n], int (*comp)(const void*, const void*));
+
+/**
  * Affiche une liste d'entiers.
  * @param n Taille de l'array
  * @param array Array d'entiers à afficher
@@ -69,11 +79,29 @@ void afficheArray(int n, const void* array[n], void (*afficheur)(const void*));
 void afficheArrayInt(int n, const int array[n]);
 
 /**
+ * Détermine si deux arrays d'entiers sont égales.
+ * @param n Taille des deux arrays.
+ * @param a Array a.
+ * @param b Array b.
+ * @return 1 si égales, 0 sinon.
+ */
+int arrayIntEgales(int n, const int a[n], const int b[n]);
+
+/**
  * Affiche une liste de double
  * @param n la taille de l'array
  * @param array le tableau de doubles à afficher
  */
 void afficheArrayDouble(int n, const double array[n]);
+
+/**
+ * Détermine si deux arrays de doubles sont égales.
+ * @param n Taille des deux arrays.
+ * @param a Array a.
+ * @param b Array b.
+ * @return 1 si égales, 0 sinon.
+ */
+int arrayDoubleEgales(int n, const double a[n], const double b[n]);
 
 /**
  * Génère une instance aléatoirement.

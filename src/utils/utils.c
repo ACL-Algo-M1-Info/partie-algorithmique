@@ -4,6 +4,7 @@
 
 // INCLUSIONS
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,24 +19,32 @@ int imax(int a, int b)
 
 void deleteInt(void* i)
 {
+    assert(i);
     free(i);
 }
 
-int* cloneInt(const int* source)
+void* cloneInt(const void* source)
 {
+    assert(source);
+    const int* src = source;
+
     int* res = (int*)malloc(sizeof(int));
-    *res = *source;
+    *res = *src;
 
     return res;
 }
 
-void afficheInt(const int* i)
+void afficheInt(const void* i)
 {
-    printf("%d", *i);
+    assert(i);
+    const int* k = i;
+
+    printf("%d", *k);
 }
 
 void afficheArray(int n, const void* array[n], void (*afficheur)(const void*))
 {
+    assert(n >= 0 && array && afficheur);
     printf("[");
 
     for (int i = 0; i < n; i++)
@@ -49,8 +58,20 @@ void afficheArray(int n, const void* array[n], void (*afficheur)(const void*))
     printf("]");
 }
 
+int arrayEgales(int n, const void* a[n], const void* b[n], int (*comp)(const void*, const void*))
+{
+    assert(n >= 0 && a && b && comp);
+
+    for (int i = 0; i < n; i++)
+        if ((*comp)(a[i], b[i]) == 0)
+            return 0;
+
+    return 1;
+}
+
 void afficheArrayInt(int n, const int array[n])
 {
+    assert(n >= 0 && array);
     printf("[");
 
     for (int i = 0; i < n; i ++)
@@ -64,8 +85,20 @@ void afficheArrayInt(int n, const int array[n])
     printf("]");
 }
 
+int arrayIntEgales(int n, const int a[n], const int b[n])
+{
+    assert(n >= 0 && a && b);
+
+    for (int i = 0; i < n; i++)
+        if (a[i] != b[i])
+            return 0;
+
+    return 1;
+}
+
 void afficheArrayDouble(int n, const double array[n])
 {
+    assert(n >= 0 && array);
     printf("[");
 
     for (int i = 0; i < n; i ++)
@@ -77,6 +110,17 @@ void afficheArrayDouble(int n, const double array[n])
     }
 
     printf("]");
+}
+
+int arrayDoubleEgales(int n, const double a[n], const double b[n])
+{
+    assert(n >= 0 && a && b);
+
+    for (int i = 0; i < n; i++)
+        if (a[i] != b[i])
+            return 0;
+
+    return 1;
 }
 
 Instance* genererInstanceAleatoire()
@@ -104,6 +148,8 @@ Instance* genererInstanceAleatoire()
 
 Instance** genererInstancesAleatoires(int nbInstances)
 {
+    assert(nbInstances >= 0);
+
     // Génération du tableau stockant des pointeurs vers des instances.
     Instance** res = malloc(nbInstances * sizeof(Instance*));
 
@@ -173,6 +219,8 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
 
 void triJacksonQ(Instance* i)
 {
+    assert(i);
+
     double tq[i->n];
     double tp[i->n];
     triFusionDecroissant(0, i->n-1, i, tq, tp);

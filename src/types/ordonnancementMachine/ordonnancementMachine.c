@@ -24,36 +24,39 @@ OrdonnancementMachine* newOrdonnancementMachine()
     return ordonnancement;
 }
 
-void deleteOrdonnancementMachine(OrdonnancementMachine* ordonnancement)
+void deleteOrdonnancementMachine(void* ordonnancement)
 {
     assert(ordonnancement);
+    OrdonnancementMachine *o = ordonnancement;
 
     // Ici, tous les ints sont préalloués pour que l'ajout se fasse bien. On vient les free.
-    deleteTableauDynamique(ordonnancement->tabId, deleteInt);
+    deleteTableauDynamique(o->tabId, deleteInt);
     free(ordonnancement);
 }
 
-OrdonnancementMachine* cloneOrdonnancementMachine(const OrdonnancementMachine* source)
+void* cloneOrdonnancementMachine(const void* source)
 {
     assert(source);
+    const OrdonnancementMachine* src = source;
 
     OrdonnancementMachine* ordonnancement = newOrdonnancementMachine();
 
-    ordonnancement->cmax = source->cmax;
+    ordonnancement->cmax = src->cmax;
 
     // La dyntable contient des int*, donc on clone selon cloneInt.
-    ordonnancement->tabId = cloneTableauDynamique(source->tabId, (void* (*)(void*))cloneInt);
+    ordonnancement->tabId = cloneTableauDynamique(src->tabId, (void* (*)(void*))cloneInt);
 
     return ordonnancement;
 }
 
-void afficheOrdonnancementMachine(const OrdonnancementMachine* ordonnancement)
+void afficheOrdonnancementMachine(const void* ordonnancement)
 {
     assert(ordonnancement);
+    const OrdonnancementMachine* o = ordonnancement;
 
-    printf("Ordonnancement[cmax = %.2lf, tabId = ", ordonnancement->cmax);
+    printf("Ordonnancement[cmax = %.2lf, tabId = ", o->cmax);
 
-    afficheTableauDynamique(ordonnancement->tabId, (void (*)(const void*))afficheInt);
+    afficheTableauDynamique(o->tabId, (void (*)(const void*))afficheInt);
 
     printf("]");
 }
