@@ -66,3 +66,11 @@ target_link_libraries(testAlgoProgDynamique PRIVATE CORE)
 # Algo ModificationInstance
 add_executable(testAlgoModificationInstance ${TESTS}/testAlgoModificationInstance.c)
 target_link_libraries(testAlgoModificationInstance PRIVATE CORE)
+
+# InitInstanceRobot
+add_executable(testInitInstanceRobot ${TESTS}/testInitInstanceRobot.c)
+target_link_libraries(testInitInstanceRobot PRIVATE CORE)
+
+# OrdonnancementRobot
+add_executable(testOrdonnancementRobot ${TESTS}/testOrdonnancementRobot.c)
+target_link_libraries(testOrdonnancementRobot PRIVATE CORE)
