@@ -52,8 +52,8 @@ int intsEgaux(const void* a, const void* b)
 {
     assert(a && b);
 
-    const int *i = a;
-    const int *j = b;
+    const int* i = a;
+    const int* j = b;
 
     return *i == *j;
 }
@@ -74,7 +74,8 @@ void afficheArray(int n, const void* array[n], void (*afficheur)(const void*))
     printf("]");
 }
 
-int arraysEgales(int n, const void* a[n], const void* b[n], int (*comp)(const void*, const void*))
+int arraysEgales(int n, const void* a[n], const void* b[n],
+                 int (*comp)(const void*, const void*))
 {
     assert(n >= 0 && a && b && comp);
 
@@ -90,7 +91,7 @@ void afficheArrayInt(int n, const int array[n])
     assert(n >= 0 && array);
     printf("[");
 
-    for (int i = 0; i < n; i ++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d", array[i]);
 
@@ -129,7 +130,7 @@ void afficheArrayDouble(int n, const double array[n])
     assert(n >= 0 && array);
     printf("[");
 
-    for (int i = 0; i < n; i ++)
+    for (int i = 0; i < n; i++)
     {
         printf("%.2lf", array[i]);
 
@@ -200,9 +201,10 @@ Instance** genererInstancesAleatoires(int nbInstances)
     return res;
 }
 
-void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *tp)
+void triFusionDecroissant(int i, int j, Instance* instance, double* tq,
+                          double* tp)
 {
-    if(j <= i) return;
+    if (j <= i) return;
 
     // Milieu du tableau
     int m = (i + j) / 2;
@@ -221,9 +223,9 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
     int c;
 
     // Remplissage de i à j pour le tableau fusionné
-    for(c = i; c <= j; c++)
+    for (c = i; c <= j; c++)
     {
-        if(pg == m + 1)
+        if (pg == m + 1)
         {
             tq[c] = instance->q[pd];
             tp[c] = instance->p[pd];
@@ -250,16 +252,17 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
     }
 
     // Copie des éléments dans tab
-    for(c = i; c <= j; c++)
+    for (c = i; c <= j; c++)
     {
         instance->q[c] = tq[c];
         instance->p[c] = tp[c];
     }
 }
 
-void triFusionCroissant(int i, int j, Instance* instance, double *tq, double *tp)
+void triFusionCroissant(int i, int j, Instance* instance, double* tq,
+                        double* tp)
 {
-    if(j <= i) return;
+    if (j <= i) return;
 
     // Milieu du tableau
     int m = (i + j) / 2;
@@ -278,9 +281,9 @@ void triFusionCroissant(int i, int j, Instance* instance, double *tq, double *tp
     int c;
 
     // Remplissage de i à j pour le tableau fusionné
-    for(c = i; c <= j; c++)
+    for (c = i; c <= j; c++)
     {
-        if(pg == m + 1)
+        if (pg == m + 1)
         {
             tq[c] = instance->q[pd];
             tp[c] = instance->p[pd];
@@ -307,7 +310,7 @@ void triFusionCroissant(int i, int j, Instance* instance, double *tq, double *tp
     }
 
     // Copie des éléments dans tab
-    for(c = i; c <= j; c++)
+    for (c = i; c <= j; c++)
     {
         instance->q[c] = tq[c];
         instance->p[c] = tp[c];
@@ -320,10 +323,11 @@ void triJacksonQ(Instance* i)
 
     double tq[i->n];
     double tp[i->n];
-    triFusionDecroissant(0, i->n-1, i, tq, tp);
+    triFusionDecroissant(0, i->n - 1, i, tq, tp);
 }
 
-void triDateDebutCroissante(Instance* instance, Instance* instanceOut, OrdonnancementMachine** ordonnancement)
+void triDateDebutCroissante(Instance* instance, Instance* instanceOut,
+                            OrdonnancementMachine** ordonnancement)
 {
     int indice = 0;
     for (int i = 0; i < instance->m; i++)
@@ -347,7 +351,7 @@ void triDateDebutCroissante(Instance* instance, Instance* instanceOut, Ordonnanc
 
     double tq[instanceOut->n];
     double tp[instanceOut->n];
-    triFusionCroissant(0, instanceOut->n-1, instanceOut, tq, tp);
+    triFusionCroissant(0, instanceOut->n - 1, instanceOut, tq, tp);
 }
 
 double rasteriserInferieur(double k, double facteur)
@@ -445,38 +449,38 @@ void supprimerDoublon(TableauDynamique* E)
 
             if (estDomine(ei, ej))
             {
-                if (estDomine(ej,ei))
+                if (estDomine(ej, ei))
                 {
                     //C'est pour éviter de supprimer les deux états.. car quand on va boucler ex [0,14] 20 pense dominé [14,0] 20 et réciproquement..
                     //donc je supprime uniquement celui avec le plus grand index (j >i)
-                    if (j>i)
+                    if (j > i)
                     {
-                        aSupprimer[j]=1;
+                        aSupprimer[j] = 1;
                     }
                 }
                 else
                 {
-                    aSupprimer[j]=1;
+                    aSupprimer[j] = 1;
                 }
-            }
-        }
-
-        for (int i = nbEtat - 1; i >= 0; i--)
-        {
-            if (aSupprimer[i])
-            {
-                //Pour le supprimer je le mets à la dernière case pour le faire dépop avec la méthode TAD
-                unsigned int dernierIndice =
-                    getTailleEffectifTableauDynamique(E) - 1;
-                if (i != dernierIndice)
-                {
-                    swapElementTableauDynamique(E, i, dernierIndice);
-                }
-
-                Etat* e = retireElementTableauDynamique(E);
-                deleteEtat(e);
             }
         }
     }
+    for (int i = nbEtat - 1; i >= 0; i--)
+    {
+        if (aSupprimer[i])
+        {
+            //Pour le supprimer je le mets à la dernière case pour le faire dépop avec la méthode TAD
+            unsigned int dernierIndice =
+                getTailleEffectifTableauDynamique(E) - 1;
+            if (i != dernierIndice)
+            {
+                swapElementTableauDynamique(E, i, dernierIndice);
+            }
+
+            Etat* e = retireElementTableauDynamique(E);
+            deleteEtat(e);
+        }
+    }
+
     free(aSupprimer);
 }
