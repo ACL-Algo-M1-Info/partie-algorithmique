@@ -22,14 +22,6 @@ void afficheEntier(const void* i)
     }
 }
 
-void* cloneEntier(void* i)
-{
-    int* entierAcloner = (int*)i;
-    int* clone = malloc(sizeof(int));
-    *clone = *entierAcloner;
-    return clone;
-}
-
 void lancerTest(const char* nomFonction, void (*testFonction)())
 {
     printf("Lancement tests sur %s \n", nomFonction);
@@ -121,7 +113,7 @@ void testcloneTableauDynamique()
     insereElementTableauDynamique(tab, i1);
     insereElementTableauDynamique(tab, i2);
 
-    TableauDynamique* clone = cloneTableauDynamique(tab, cloneEntier);
+    TableauDynamique* clone = cloneTableauDynamique(tab, cloneInt);
     assert(getElementTableauDynamique(clone,0)!=i1);
     assert(getElementTableauDynamique(clone,1)!=i2);
     setElementTableauDynamique(tab, 0, i3);

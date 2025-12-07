@@ -73,7 +73,7 @@ void afficheEtat(const void* etat)
     const Etat* e = etat;
 
     printf("Etat[Lmax = %.2lf, m = %d, ordonnancements = ", e->lmax, e->m);
-    afficheArray(e->m, (const void**)e->ordonnancements, (void (*)(const void*))afficheOrdonnancementMachine);
+    afficheArray(e->m, (const void**)e->ordonnancements, afficheOrdonnancementMachine);
     printf("]");
 }
 
