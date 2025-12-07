@@ -8,6 +8,7 @@
 // INCLUSIONS
 
 #include "../types/instance/instance.h"
+#include "types/ordonnancementMachine/ordonnancementMachine.h"
 
 // FONCTIONS
 
@@ -26,6 +27,12 @@ void modifierInstanceFPTAS(Instance* instance);
 
 /* Exo 4 */
 
-// TODO entête algo exo 4
+/**
+ * Calcule la date de fin optimale de la dernière livraison
+ * @param instance Instance du problème
+ * @param ordonnancementMachine Tableau d'ordonnancements sur les différentes machines
+ * @return La date de fin optimale (Cmax)
+ */
+double ordonnancementRobot(Instance* instance, OrdonnancementMachine** ordonnancementMachine);
 
 #endif //ALGO_H

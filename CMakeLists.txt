@@ -30,7 +30,8 @@ target_include_directories(CORE PUBLIC ${SRC})
 ### EXECUTABLES ###
 
 ## Executable Main
-add_executable(Algorithmie ${SRC}/main.c)
+add_executable(Algorithmie ${SRC}/main.c
+        src/types/etatRobot/etatRobot.c)
 target_link_libraries(Algorithmie PRIVATE CORE)
 
 ## Tests
@@ -48,9 +49,18 @@ add_executable(testOrdonnancementMachine ${TESTS}/testOrdonnancementMachine.c)
 target_link_libraries(testOrdonnancementMachine PRIVATE CORE)
 
 # Etat
-add_executable(testEtat ${TESTS}/testEtat.c)
+add_executable(testEtat ${TESTS}/testEtat.c
+        tests/testOrdonnancementRobot.c)
 target_link_libraries(testEtat PRIVATE CORE)
 
 # Jackson
 add_executable(testJackson ${TESTS}/testJackson.c)
 target_link_libraries(testJackson PRIVATE CORE)
+
+# InitInstanceRobot
+add_executable(testInitInstanceRobot ${TESTS}/testInitInstanceRobot.c)
+target_link_libraries(testInitInstanceRobot PRIVATE CORE)
+
+# OrdonnancementRobot
+add_executable(testOrdonnancementRobot ${TESTS}/testOrdonnancementRobot.c)
+target_link_libraries(testOrdonnancementRobot PRIVATE CORE)
