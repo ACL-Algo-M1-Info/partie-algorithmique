@@ -8,6 +8,7 @@
 // INCLUSIONS
 
 #include "../types/instance/instance.h"
+#include "types/ordonnancementMachine/ordonnancementMachine.h"
 
 // DEFINES
 
@@ -162,6 +163,16 @@ Instance** genererInstancesAleatoires(int nbInstances);
  */
 void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *tp);
 
+/**
+ * Applique le tri fusion sur les qi d'une instance donnée
+ *
+ * @param i le début du tableau
+ * @param j la taille du tableau - 1
+ * @param instance l'instance où on veut appliquer le tri
+ * @param tq tableau pour stocker provisoirement les qi
+ * @param tp tableau pour stocker provisoirement les pi
+ */
+void triFusionCroissant(int i, int j, Instance* instance, double *tq, double *tp);
 
 /**
  * Applique l'ordre de Jackson sur les qi d'une instance
@@ -169,6 +180,16 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
  * @param i l'instance où l'on veut appliquer l'ordre
  */
 void triJacksonQ(Instance* i);
+
+/**
+ * Rassemble les taches des differents ordonnancements dans une même instance
+ * triée par date de début au plus tôt croissante
+ * @param instance Instance de départ
+ * @param instanceOut Instance pour le problème de robot (sortie)
+ * @param ordonnancement Ordonnancement donné par le problème de placement sur m
+ * machines (Lmax)
+ */
+void triDateDebutCroissante(Instance* instance, Instance* instanceOut, OrdonnancementMachine** ordonnancement);
 
 /**
  * Rastérise un nombre pour qu'il s'aligne sur une échelle précise. Emploie un arrondi inférieur.
