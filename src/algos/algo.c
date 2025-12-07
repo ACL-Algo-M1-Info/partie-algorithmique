@@ -48,7 +48,7 @@ double algoProgrammationDynamique(Instance* instance)
             }
         }
         deleteTableauDynamique(E, deleteEtat);
-        E = cloneTableauDynamique(Ej, cloneEtat);
+        E = Ej;
     }
     afficheTableauDynamique(E, afficheEtat, "Ensemble\n");
     return minDeLensemble(E);
@@ -84,7 +84,7 @@ double algoProgrammationDynamiqueSimplifie(Instance* instance)
         }
         deleteTableauDynamique(E, deleteEtat);
         supprimerDoublon(Ej);
-        E = cloneTableauDynamique(Ej, cloneEtat);
+        E = Ej;
     }
     afficheTableauDynamique(E, afficheEtat, "Ensemble\n");
     return minDeLensemble(E);
