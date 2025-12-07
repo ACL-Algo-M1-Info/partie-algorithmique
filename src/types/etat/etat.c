@@ -77,6 +77,25 @@ void afficheEtat(const void* etat)
     printf("]");
 }
 
+int etatsEgaux(const void* a, const void* b)
+{
+    assert(a && b);
+
+    const Etat* i = a;
+    const Etat* j = b;
+
+    // Egalité des lmax
+    if (dblcmp(i->lmax, j->lmax) == 0)
+        return 0;
+
+    // Egalité des m
+    if (i->m != j->m)
+        return 0;
+
+    // Egalité des tableaux d'ordonnancement.
+    return arraysEgales(i->m, (const void**)i->ordonnancements, (const void**)j->ordonnancements, ordonnancementsMachinesEgaux);
+}
+
 void ajouterTacheSurMachine(Etat* etat, int k, int i, double pi, double qi)
 {
     assert(etat);

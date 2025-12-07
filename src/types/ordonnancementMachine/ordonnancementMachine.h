@@ -54,6 +54,14 @@ void* cloneOrdonnancementMachine(const void* source);
 void afficheOrdonnancementMachine(const void* ordonnancement);
 
 /**
+ * Détermine si deux ordonnancements sont égaux.
+ * @param a Ordonnancement a.
+ * @param b Ordonnancement b.
+ * @return 1 si les deux sont égaux, 0 sinon.
+ */
+int ordonnancementsMachinesEgaux(const void* a, const void* b);
+
+/**
  * Ajoute une tâche à l'ordonnancement en fin de position.
  * @param ordonnancement L'ordonnancement à manipuler.
  * @param i Indice de la tâche à ajouter.

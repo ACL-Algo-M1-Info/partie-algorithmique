@@ -2,6 +2,7 @@
 // Created by remik on 06/12/2025.
 //
 
+#include <assert.h>
 #include <stdio.h>
 
 #include "../src/types/instance/instance.h"
@@ -26,6 +27,15 @@ int main(int argc, char *argv[])
     printf("Clone:\n");
     afficheInstance(i2);
     printf("\n\n");
+    assert(instancesEgales(i, i2));
+
+    printf("Modification i sur p[0]:\n");
+    i->p[0] = 1;
+    afficheInstance(i);
+    printf("\ni2:\n");
+    afficheInstance(i2);
+    printf("\n\n");
+    assert(!instancesEgales(i, i2));
 
     deleteInstance(i);
     deleteInstance(i2);

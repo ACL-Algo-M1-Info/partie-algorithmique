@@ -5,6 +5,7 @@
 // INCLUSIONS
 
 #include <assert.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,6 +16,11 @@
 int imax(int a, int b)
 {
     return a > b ? a : b;
+}
+
+int dblcmp(double a, double b)
+{
+    return fabs(a - b) < DOUBLE_EGALITE_EPSILON;
 }
 
 void deleteInt(void* i)
@@ -42,6 +48,16 @@ void afficheInt(const void* i)
     printf("%d", *k);
 }
 
+int intsEgaux(const void* a, const void* b)
+{
+    assert(a && b);
+
+    const int *i = a;
+    const int *j = b;
+
+    return *i == *j;
+}
+
 void afficheArray(int n, const void* array[n], void (*afficheur)(const void*))
 {
     assert(n >= 0 && array && afficheur);
@@ -58,7 +74,7 @@ void afficheArray(int n, const void* array[n], void (*afficheur)(const void*))
     printf("]");
 }
 
-int arrayEgales(int n, const void* a[n], const void* b[n], int (*comp)(const void*, const void*))
+int arraysEgales(int n, const void* a[n], const void* b[n], int (*comp)(const void*, const void*))
 {
     assert(n >= 0 && a && b && comp);
 
@@ -85,7 +101,7 @@ void afficheArrayInt(int n, const int array[n])
     printf("]");
 }
 
-int arrayIntEgales(int n, const int a[n], const int b[n])
+int arraysIntEgales(int n, const int a[n], const int b[n])
 {
     assert(n >= 0 && a && b);
 
@@ -112,7 +128,7 @@ void afficheArrayDouble(int n, const double array[n])
     printf("]");
 }
 
-int arrayDoubleEgales(int n, const double a[n], const double b[n])
+int arraysDoubleEgales(int n, const double a[n], const double b[n])
 {
     assert(n >= 0 && a && b);
 

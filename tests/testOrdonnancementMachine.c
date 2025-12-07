@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     afficheOrdonnancementMachine(o2);
     printf("\n\n");
     assert(o2->cmax == 3 && getTailleEffectifTableauDynamique(o2->tabId) == 1);
+    assert(ordonnancementsMachinesEgaux(o, o2));
 
     ajouterTache(o, 2, 5);
 
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
     afficheOrdonnancementMachine(o2);
     printf("\n\n");
     assert(o2->cmax == 3 && getTailleEffectifTableauDynamique(o2->tabId) == 1);
+    assert(!ordonnancementsMachinesEgaux(o, o2));
 
     deleteOrdonnancementMachine(o);
     deleteOrdonnancementMachine(o2);

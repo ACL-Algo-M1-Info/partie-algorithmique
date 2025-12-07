@@ -58,6 +58,14 @@ void* cloneEtat(const void* source);
 void afficheEtat(const void* etat);
 
 /**
+ * Compare des états.
+ * @param a Etat a.
+ * @param b Etat b.
+ * @return 1 si égaux, 0 sinon.
+ */
+int etatsEgaux(const void* a, const void* b);
+
+/**
  *
  * @param etat l'état où se situe la machine où on ajoute la tâche
  * @param k la machine sur laquelle on ajoute la tâche

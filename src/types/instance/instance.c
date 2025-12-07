@@ -65,6 +65,8 @@ void afficheInstance(const void* instance)
 
 int instancesEgales(const void* a, const void* b)
 {
+    assert(a && b);
+
     const Instance* i = a;
     const Instance* j = b;
 
@@ -77,11 +79,11 @@ int instancesEgales(const void* a, const void* b)
         return 0;
 
     // Tableaux inégaux des p
-    if (arrayDoubleEgales(i->n, i->p, j->p) == 0)
+    if (arraysDoubleEgales(i->n, i->p, j->p) == 0)
         return 0;
 
     // Tableaux inégaux des q
-    if (arrayDoubleEgales(i->n, i->q, j->q) == 0)
+    if (arraysDoubleEgales(i->n, i->q, j->q) == 0)
         return 0;
 
     return 1;

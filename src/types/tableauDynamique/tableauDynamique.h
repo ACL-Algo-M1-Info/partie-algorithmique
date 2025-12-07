@@ -132,6 +132,15 @@ void afficheTableauDynamique(const TableauDynamique* tab,
                              void (*afficheElement)(const void*));
 
 /**
+ * Compare deux tableaux dynamiques.
+ * @param a Tableau a.
+ * @param b Tableau b.
+ * @param comp Fonction de comparaison entre les éléments.
+ * @return 1 si égaux, 0 sinon.
+ */
+int tableauxDynamiquesEgaux(const TableauDynamique* a, const TableauDynamique* b, int (*comp)(const void*, const void*));
+
+/**
  * Insère à la première position disponible un nouvel élément.
  * Si le tableau est déjà rempli, la taille du tableau est doublé avant
  * @param tab

@@ -11,6 +11,9 @@
 
 // DEFINES
 
+/** Facteur d'erreur pour considérer l'égalité de deux doubles. */
+#define DOUBLE_EGALITE_EPSILON 10e-6
+
 /** Borne pour le N maximal. */
 #define MAX_N_ALEA_GEN 50
 
@@ -34,6 +37,14 @@
 int imax(int a, int b);
 
 /**
+ * Détermine si deux doubles sont égaux.
+ * @param a Double a.
+ * @param b Double b.
+ * @return 1 si égaux, 0 sinon.
+ */
+int dblcmp(double a, double b);
+
+/**
  * Supprime un entier
  *
  * @param i l'entier que l'on veut supprimer
@@ -54,6 +65,14 @@ void* cloneInt(const void* source);
 void afficheInt(const void* i);
 
 /**
+ * Compare deux entiers.
+ * @param a Entier a.
+ * @param b Entier b.
+ * @return 1 si égaux, 0 sinon.
+ */
+int intsEgaux(const void* a, const void* b);
+
+/**
  * Affiche une liste.
  * @param n Taille de l'array
  * @param array Liste à afficher.
@@ -69,7 +88,7 @@ void afficheArray(int n, const void* array[n], void (*afficheur)(const void*));
  * @param comp Méthode de comparaison des deux arrays.
  * @return 1 si égales, 0 sinon.
  */
-int arrayEgales(int n, const void* a[n], const void* b[n], int (*comp)(const void*, const void*));
+int arraysEgales(int n, const void* a[n], const void* b[n], int (*comp)(const void*, const void*));
 
 /**
  * Affiche une liste d'entiers.
@@ -85,7 +104,7 @@ void afficheArrayInt(int n, const int array[n]);
  * @param b Array b.
  * @return 1 si égales, 0 sinon.
  */
-int arrayIntEgales(int n, const int a[n], const int b[n]);
+int arraysIntEgales(int n, const int a[n], const int b[n]);
 
 /**
  * Affiche une liste de double
@@ -101,7 +120,7 @@ void afficheArrayDouble(int n, const double array[n]);
  * @param b Array b.
  * @return 1 si égales, 0 sinon.
  */
-int arrayDoubleEgales(int n, const double a[n], const double b[n]);
+int arraysDoubleEgales(int n, const double a[n], const double b[n]);
 
 /**
  * Génère une instance aléatoirement.

@@ -61,6 +61,25 @@ void afficheOrdonnancementMachine(const void* ordonnancement)
     printf("]");
 }
 
+int ordonnancementsMachinesEgaux(const void* a, const void* b)
+{
+    assert(a && b);
+
+    const OrdonnancementMachine* i = a;
+    const OrdonnancementMachine* j = b;
+
+    // Cmax différents (avec marge d'erreur de 10e-6)
+    if (!dblcmp(i->cmax, j->cmax))
+        return 0;
+
+    // Pas les mêmes éléments
+    if (getTailleEffectifTableauDynamique(i->tabId) != getTailleEffectifTableauDynamique(j->tabId))
+        return 0;
+
+    // Comparaison des entiers contenus dans le tableau
+    return tableauxDynamiquesEgaux(i->tabId, j->tabId, intsEgaux);
+}
+
 void ajouterTache(OrdonnancementMachine* ordonnancement, int i, double pi)
 {
     assert(ordonnancement && i >= 0 && pi >= 0);
