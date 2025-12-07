@@ -33,6 +33,6 @@ void modifierInstanceFPTAS(Instance* instance);
  * @param ordonnancementMachine Tableau d'ordonnancements sur les différentes machines
  * @return La date de fin optimale (Cmax)
  */
-double ordonnancementRobot(Instance* instance, OrdonnancementMachine** ordonnancementMachine);
+double ordonnancementRobot(Instance* instance, OrdonnancementMachine** ordonnancementMachine, double e);
 
 #endif //ALGO_H

@@ -32,6 +32,6 @@ int main(int argc, char *argv[])
     OrdonnancementMachine* tabOrd[] = {o, o2, o3};
 
     //Algo
-    double res = ordonnancementRobot(i, tabOrd);
+    double res = ordonnancementRobot(i, tabOrd, 0.2);
     printf("\nResultat  : %lf \n", res);
 }

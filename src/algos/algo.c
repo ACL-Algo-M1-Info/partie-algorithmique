@@ -28,8 +28,29 @@ void modifierInstanceFPTAS(Instance* instance)
 
 /* Exo 4 */
 
-double ordonnancementRobot(Instance* instance, OrdonnancementMachine** ordonnancementMachine)
+double ordonnancementRobot(Instance* instance, OrdonnancementMachine** ordonnancementMachine, double e)
 {
+    if ( e < 0 )
+        return -1;
+
+    //On calcule le nombre de lignes et de colonnes pour FPTAS
+    double P = 0;
+    double Q = 0;
+    for (int i = 0; i < instance->n; i++)
+    {
+        P += instance->p[i];
+        Q += instance->q[i];
+    }
+
+    double tailleCarre = (e * (P + Q)) / (2 * instance->n);
+    int nbLignesCol = (P + Q) / tailleCarre;
+    nbLignesCol = ceil(nbLignesCol);
+
+    printf("\nNbLignes et col : %d \n", nbLignesCol);
+    printf("\nTaille carré : %lf \n", tailleCarre);
+
+    //Fin calcule
+
     //Rassemblement des ordonnancements sur les différentes machines en un seul vecteur trié par date de début au plus tôt croissante
     Instance* newInstance = cloneInstance(instance);
 
@@ -104,12 +125,66 @@ double ordonnancementRobot(Instance* instance, OrdonnancementMachine** ordonnanc
 
         //Conserver un seul état par zone
 
+        EtatRobot* tab[nbLignesCol][nbLignesCol];
+
+        for (int j = 0; j < nbLignesCol; j++)
+        {
+            for (int k = 0; k < nbLignesCol; k++)
+            {
+                tab[j][k] = NULL;
+            }
+        }
+
+        unsigned int nbElNouveau = getTailleEffectifTableauDynamique(nouveauxEtats);
+        for (int j = 0; j < nbElNouveau; j++)
+        {
+            EtatRobot* etat = getElementTableauDynamique(nouveauxEtats, j);
+
+            int a = etat->ordonnancements[0]->cmax;
+            int b = etat->ordonnancements[1]->cmax;
+
+            int col = imax(0, ceil(a / tailleCarre));
+            int ligne = imax(0, ceil(b / tailleCarre));
+
+            EtatRobot* etatCompare = tab[ligne][col];
+            if (etatCompare == NULL)
+            {
+                tab[ligne][col] = etat;
+            }
+            else
+            {
+                if (etatCompare->ordonnancements[0]->cmax > etat->ordonnancements[0]->cmax)
+                {
+                    insereElementTableauDynamique(etatASupp, tab[ligne][col]);
+                    tab[ligne][col] = etat;
+                }
+                else
+                {
+                    insereElementTableauDynamique(etatASupp, etat);
+                }
+            }
+        }
+
+        TableauDynamique * tabFPTAS = newTableauDynamique();
+        for (int j = 0; j < nbLignesCol; j++)
+        {
+            for (int k = 0; k < nbLignesCol; k++)
+            {
+                EtatRobot* etatCompare = tab[j][k];
+                if (etatCompare != NULL)
+                {
+                    insereElementTableauDynamique(tabFPTAS, tab[j][k]);
+                }
+            }
+        }
+
         //Fin un état par zone
 
         deleteTableauDynamique(etatASupp, deleteEtatRobot);
         deleteTableauDynamique(ensembleEtat, NULL);
+        deleteTableauDynamique(nouveauxEtats, NULL);
 
-        ensembleEtat = nouveauxEtats;
+        ensembleEtat = tabFPTAS;
     }
 
     unsigned int nbElEnsemble = getTailleEffectifTableauDynamique(ensembleEtat);
