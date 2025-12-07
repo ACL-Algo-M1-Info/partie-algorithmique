@@ -10,6 +10,8 @@
 #include "../types/instance/instance.h"
 #include "../types/tableauDynamique/tableauDynamique.h"
 #include "../types/etat/etat.h"
+#include "types/ordonnancementMachine/ordonnancementMachine.h"
+
 // DEFINES
 
 /** Facteur d'erreur pour considérer l'égalité de deux doubles. */
@@ -108,6 +110,14 @@ void afficheArrayInt(int n, const int array[n]);
 int arraysIntEgales(int n, const int a[n], const int b[n]);
 
 /**
+ * Retrouve l'entier maximal dans l'array. L'array ne doit pas être vide.
+ * @param n Taille de l'array > 0.
+ * @param a Array.
+ * @return L'entier max dans l'array.
+ */
+int maxArrayInt(int n, const int a[n]);
+
+/**
  * Affiche une liste de double
  * @param n la taille de l'array
  * @param array le tableau de doubles à afficher
@@ -122,6 +132,14 @@ void afficheArrayDouble(int n, const double array[n]);
  * @return 1 si égales, 0 sinon.
  */
 int arraysDoubleEgales(int n, const double a[n], const double b[n]);
+
+/**
+ * Retrouve le double maximal dans l'array. L'array ne doit pas être vide.
+ * @param n Taille de l'array > 0.
+ * @param a Array.
+ * @return Le double max dans l'array.
+ */
+double maxArrayDouble(int n, const double a[n]);
 
 /**
  * Génère une instance aléatoirement.
@@ -147,6 +165,16 @@ Instance** genererInstancesAleatoires(int nbInstances);
  */
 void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *tp);
 
+/**
+ * Applique le tri fusion sur les qi d'une instance donnée
+ *
+ * @param i le début du tableau
+ * @param j la taille du tableau - 1
+ * @param instance l'instance où on veut appliquer le tri
+ * @param tq tableau pour stocker provisoirement les qi
+ * @param tp tableau pour stocker provisoirement les pi
+ */
+void triFusionCroissant(int i, int j, Instance* instance, double *tq, double *tp);
 
 /**
  * Applique l'ordre de Jackson sur les qi d'une instance
@@ -154,6 +182,24 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
  * @param i l'instance où l'on veut appliquer l'ordre
  */
 void triJacksonQ(Instance* i);
+
+/**
+ * Rassemble les taches des differents ordonnancements dans une même instance
+ * triée par date de début au plus tôt croissante
+ * @param instance Instance de départ
+ * @param instanceOut Instance pour le problème de robot (sortie)
+ * @param ordonnancement Ordonnancement donné par le problème de placement sur m
+ * machines (Lmax)
+ */
+void triDateDebutCroissante(Instance* instance, Instance* instanceOut, OrdonnancementMachine** ordonnancement);
+
+/**
+ * Rastérise un nombre pour qu'il s'aligne sur une échelle précise. Emploie un arrondi inférieur.
+ * @param k Nombre à rastériser.
+ * @param facteur Facteur de rastérisation.
+ * @return Nombre k rastérisé sur la grille selon facteur.
+ */
+double rasteriserInferieur(double k, double facteur);
 
 /**
  * retourne le lmax minimal de l'ensemble d'états E

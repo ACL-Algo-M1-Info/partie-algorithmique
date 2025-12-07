@@ -121,7 +121,7 @@ void testcloneTableauDynamique()
     insereElementTableauDynamique(tab, i1);
     insereElementTableauDynamique(tab, i2);
 
-    TableauDynamique* clone = cloneTableauDynamique(tab, cloneEntier);
+    TableauDynamique* clone = cloneTableauDynamique(tab, cloneInt);
     assert(getElementTableauDynamique(clone,0)!=i1);
     assert(getElementTableauDynamique(clone,1)!=i2);
     setElementTableauDynamique(tab, 0, i3);

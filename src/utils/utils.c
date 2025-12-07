@@ -112,6 +112,18 @@ int arraysIntEgales(int n, const int a[n], const int b[n])
     return 1;
 }
 
+int maxArrayInt(int n, const int a[n])
+{
+    assert(n > 0 && a);
+
+    int res = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] > res)
+            res = a[i];
+
+    return res;
+}
+
 void afficheArrayDouble(int n, const double array[n])
 {
     assert(n >= 0 && array);
@@ -139,6 +151,18 @@ int arraysDoubleEgales(int n, const double a[n], const double b[n])
     return 1;
 }
 
+double maxArrayDouble(int n, const double a[n])
+{
+    assert(n > 0 && a);
+
+    double res = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] > res)
+            res = a[i];
+
+    return res;
+}
+
 Instance* genererInstanceAleatoire()
 {
     // Génération aléatoire.
@@ -153,10 +177,10 @@ Instance* genererInstanceAleatoire()
     for (int i = 0; i < randN; i++)
     {
         // Pour p(i)
-        randP[i] = rand() % MAX_P_ALEA_GEN;
+        randP[i] = 1 + rand() % (MAX_P_ALEA_GEN - 1);
 
         // Pour q(i)
-        randQ[i] = rand() % MAX_Q_ALEA_GEN;
+        randQ[i] = 1 + rand() % (MAX_Q_ALEA_GEN - 1);
     }
 
     return newInstance(randN, randM, randP, randQ);
@@ -233,6 +257,63 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
     }
 }
 
+void triFusionCroissant(int i, int j, Instance* instance, double *tq, double *tp)
+{
+    if(j <= i) return;
+
+    // Milieu du tableau
+    int m = (i + j) / 2;
+
+    // Tri de la moitié gauche
+    triFusionCroissant(i, m, instance, tq, tp);
+    // Tri de la moitié droite
+    triFusionCroissant(m + 1, j, instance, tq, tp);
+
+    // Pointeur du sous tableau gauche
+    int pg = i;
+    // Pointeur du sous tableau droite
+    int pd = m + 1;
+
+    // Compteur
+    int c;
+
+    // Remplissage de i à j pour le tableau fusionné
+    for(c = i; c <= j; c++)
+    {
+        if(pg == m + 1)
+        {
+            tq[c] = instance->q[pd];
+            tp[c] = instance->p[pd];
+            pd++;
+        }
+        else if (pd == j + 1)
+        {
+            tq[c] = instance->q[pg];
+            tp[c] = instance->p[pg];
+            pg++;
+        }
+        else if (instance->q[pg] < instance->q[pd])
+        {
+            tq[c] = instance->q[pg];
+            tp[c] = instance->p[pg];
+            pg++;
+        }
+        else
+        {
+            tq[c] = instance->q[pd];
+            tp[c] = instance->p[pd];
+            pd++;
+        }
+    }
+
+    // Copie des éléments dans tab
+    for(c = i; c <= j; c++)
+    {
+        instance->q[c] = tq[c];
+        instance->p[c] = tp[c];
+    }
+}
+
 void triJacksonQ(Instance* i)
 {
     assert(i);
@@ -242,8 +323,38 @@ void triJacksonQ(Instance* i)
     triFusionDecroissant(0, i->n-1, i, tq, tp);
 }
 
+void triDateDebutCroissante(Instance* instance, Instance* instanceOut, OrdonnancementMachine** ordonnancement)
+{
+    int indice = 0;
+    for (int i = 0; i < instance->m; i++)
+    {
+        OrdonnancementMachine* ordo = ordonnancement[i];
+        int size = ordo->tabId->tailleEffectif;
+        double cmax = 0;
+        for (int j = 0; j < size; j++)
+        {
+            int* index = getElementTableauDynamique(ordo->tabId, j);
+            cmax += instance->p[*index - 1];
 
+            instanceOut->p[indice] = instance->q[*index - 1];
+            instanceOut->q[indice] = cmax;
+            indice++;
+        }
+    }
 
+    //instanceOut est désormais initialisé avec pi qui représente le temps de livraison pour un robot et qi qui représente la date de début au plus tôt de la tâche i
+    afficheInstance(instanceOut);
+
+    double tq[instanceOut->n];
+    double tp[instanceOut->n];
+    triFusionCroissant(0, instanceOut->n-1, instanceOut, tq, tp);
+}
+
+double rasteriserInferieur(double k, double facteur)
+{
+    // La formule est floor(k / facteur) * facteur pour la rastérisation
+    return floor(k / facteur) * facteur;
+}
 
 double minDeLensemble(const TableauDynamique* E)
 {

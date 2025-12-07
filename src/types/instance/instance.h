@@ -66,4 +66,18 @@ void afficheInstance(const void* instance);
  */
 int instancesEgales(const void* a, const void* b);
 
+/**
+ * Obtient le qmax de l'instance.
+ * @param instance Instance.
+ * @return qmax de l'instance.
+ */
+double obtenirQmax(Instance* instance);
+
+/**
+ * Obtient le pmax de l'instance.
+ * @param instance Instance.
+ * @return pmax de l'instance.
+ */
+double obtenirPmax(Instance* instance);
+
 #endif //INSTANCE_H

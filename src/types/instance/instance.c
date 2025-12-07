@@ -88,3 +88,17 @@ int instancesEgales(const void* a, const void* b)
 
     return 1;
 }
+
+double obtenirQmax(Instance* instance)
+{
+    assert(instance);
+
+    return maxArrayDouble(instance->n, instance->q);
+}
+
+double obtenirPmax(Instance* instance)
+{
+    assert(instance);
+
+    return maxArrayDouble(instance->n, instance->p);
+}
