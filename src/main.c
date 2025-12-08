@@ -26,7 +26,7 @@
 /** Valeur epsilon désirée. */
 #define EPSILON .2
 
-/** Détermine si l'algo de base doit être utilisé. */
+/** Détermine si l'algo de base doit être utilisé. 1 si oui, 0 sinon. */
 #define UTILISER_ALGO_BASE 0
 
 // DECLARATIONS
@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
     printf("RESULTATS ===\n\n");
 
 #if UTILISER_ALGO_BASE == 1
-    printf("- Algo sans suppression des etats : %lf secondes\n", tempsAlgo);
+    printf("- Algo sans suppression des etats : %lf secondes\n", tempsAlgoTotal);
 #endif
 
     printf("- Algo avec suppression des etats : %lf secondes pour un ecart du Lmax moyen de %lf par rapport a l'algo 1\n", tempsAlgoSimplifieTotal, ecartLmaxAlgoSimplifieTotal);
