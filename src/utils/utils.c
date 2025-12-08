@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "utils.h"
 
@@ -360,17 +361,17 @@ double rasteriserInferieur(double k, double facteur)
     return floor(k / facteur) * facteur;
 }
 
-double minDeLensemble(const TableauDynamique* E)
+Etat* minDeLensemble(const TableauDynamique* E)
 {
     Etat* e = getElementTableauDynamique(E, 0);
-    double min = e->lmax;
+    Etat* min = e;
 
     for (int i = 1; i < getTailleEffectifTableauDynamique(E); i++)
     {
         Etat* ei = getElementTableauDynamique(E, i);
-        if (min > ei->lmax)
+        if (min->lmax > ei->lmax)
         {
-            min = ei->lmax;
+            min = ei;
         }
     }
     return min;
@@ -483,4 +484,17 @@ void supprimerDoublon(TableauDynamique* E)
     }
 
     free(aSupprimer);
+}
+
+double benchmarkSurInstance(Instance* instance, void* (*traitement)(Instance*), void** out)
+{
+    assert(instance && traitement);
+
+    volatile clock_t start, end;
+
+    start = clock();
+    *out = (*traitement)(instance);
+    end = clock();
+
+    return (double)((end - start) / (double)CLOCKS_PER_SEC);
 }

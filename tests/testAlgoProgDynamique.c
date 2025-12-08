@@ -36,11 +36,11 @@ void testTout()
     // insereElementTableauDynamique(E,etat);
     // afficheTableauDynamique(E,afficheEtat);
 
-    // double minimiserLmax = algoProgrammationDynamique(instance);
-    // printf("\nlmax minimal de l'instance : %lf",minimiserLmax);
+    // Etat* minimiserLmax = algoProgrammationDynamique(instance);
+    // printf("\nlmax minimal de l'instance : %lf",minimiserLmax->lmax);
 
-    double minimiserLmaxSimplifie = algoProgrammationDynamiqueSimplifie(instance);
-    printf("\nlmax minimal de l'instance : %lf",minimiserLmaxSimplifie);
+    Etat* minimiserLmaxSimplifie = algoProgrammationDynamiqueSimplifie(instance);
+    printf("\nlmax minimal de l'instance : %lf",minimiserLmaxSimplifie->lmax);
 }
 int main()
 {

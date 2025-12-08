@@ -19,7 +19,7 @@
 /* Exo 2 */
 
 
-double algoProgrammationDynamique(Instance* instance)
+Etat* algoProgrammationDynamique(Instance* instance)
 {
     triJacksonQ(instance);
     int nbMachine = instance->m;
@@ -54,7 +54,7 @@ double algoProgrammationDynamique(Instance* instance)
     return minDeLensemble(E);
 }
 
-double algoProgrammationDynamiqueSimplifie(Instance* instance)
+Etat* algoProgrammationDynamiqueSimplifie(Instance* instance)
 {
     triJacksonQ(instance);
     int nbMachine = instance->m;

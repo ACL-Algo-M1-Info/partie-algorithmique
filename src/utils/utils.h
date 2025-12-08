@@ -202,11 +202,11 @@ void triDateDebutCroissante(Instance* instance, Instance* instanceOut, Ordonnanc
 double rasteriserInferieur(double k, double facteur);
 
 /**
- * retourne le lmax minimal de l'ensemble d'états E
+ * retourne l'état minimisant le Lmax de l'ensemble d'états E
  * @param E
  * @return
  */
-double minDeLensemble(const TableauDynamique* E);
+Etat* minDeLensemble(const TableauDynamique* E);
 
 /**
  * Compare le cmax de deux machines
@@ -236,4 +236,14 @@ int estDomine(const Etat* a, const Etat* b);
  * @param E
  */
 void supprimerDoublon(TableauDynamique* E);
+
+/**
+ * Effectue un benchmark sur l'instance donnée.
+ * @param instance Instance à traiter.
+ * @param traitement Méthode de traitement associée.
+ * @param out Sortie éventuelle de la méthode de traitement.
+ * @return Le temps mesuré pour effectuer le traitement.
+ */
+double benchmarkSurInstance(Instance* instance, void* (*traitement)(Instance*), void** out);
+
 #endif  // ALGORITHMIE_UTILS_H

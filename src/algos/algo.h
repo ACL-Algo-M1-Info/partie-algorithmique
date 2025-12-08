@@ -7,6 +7,7 @@
 
 // INCLUSIONS
 
+#include "types/etat/etat.h"
 #include "../types/instance/instance.h"
 #include "types/ordonnancementMachine/ordonnancementMachine.h"
 
@@ -20,7 +21,7 @@
  * @param instance
  * @return le lmax minimal
  */
-double algoProgrammationDynamique(Instance* instance);
+Etat* algoProgrammationDynamique(Instance* instance);
 /**
  * Algo exact
  * Génére toutes les combinaisons de placement possible d'ordonnancement pour une instance de n tâche et m machine
@@ -29,7 +30,7 @@ double algoProgrammationDynamique(Instance* instance);
  * @param instance
  * @return
  */
-double algoProgrammationDynamiqueSimplifie(Instance* instance);
+Etat* algoProgrammationDynamiqueSimplifie(Instance* instance);
 /* Exo 3 */
 
 /**
