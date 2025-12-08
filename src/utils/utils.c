@@ -19,9 +19,9 @@ int imax(int a, int b)
     return a > b ? a : b;
 }
 
-int dblcmp(double a, double b)
+int imin(int a, int b)
 {
-    return fabs(a - b) < DOUBLE_EGALITE_EPSILON;
+    return a < b ? a : b;
 }
 
 void deleteInt(void* i)
@@ -126,57 +126,14 @@ int maxArrayInt(int n, const int a[n])
     return res;
 }
 
-void afficheArrayDouble(int n, const double array[n])
+Instance* genererInstanceAleatoire(int n, int m)
 {
-    assert(n >= 0 && array);
-    printf("[");
-
-    for (int i = 0; i < n; i++)
-    {
-        printf("%.2lf", array[i]);
-
-        if (i < n - 1)
-            printf(", ");
-    }
-
-    printf("]");
-}
-
-int arraysDoubleEgales(int n, const double a[n], const double b[n])
-{
-    assert(n >= 0 && a && b);
-
-    for (int i = 0; i < n; i++)
-        if (a[i] != b[i])
-            return 0;
-
-    return 1;
-}
-
-double maxArrayDouble(int n, const double a[n])
-{
-    assert(n > 0 && a);
-
-    double res = a[0];
-    for (int i = 1; i < n; i++)
-        if (a[i] > res)
-            res = a[i];
-
-    return res;
-}
-
-Instance* genererInstanceAleatoire()
-{
-    // Génération aléatoire.
-    int randN = rand() % MAX_N_ALEA_GEN;
-    int randM = rand() % MAX_M_ALEA_GEN;
-
     // Tableaux aléatoires des p(i) et q(i)
-    double randP[randN];
-    double randQ[randN];
+    int randP[n];
+    int randQ[m];
 
     // Assignation des valeurs aléatoires p(i) et q(i)
-    for (int i = 0; i < randN; i++)
+    for (int i = 0; i < n; i++)
     {
         // Pour p(i)
         randP[i] = 1 + rand() % (MAX_P_ALEA_GEN - 1);
@@ -185,10 +142,10 @@ Instance* genererInstanceAleatoire()
         randQ[i] = 1 + rand() % (MAX_Q_ALEA_GEN - 1);
     }
 
-    return newInstance(randN, randM, randP, randQ);
+    return newInstance(n, m, randP, randQ);
 }
 
-Instance** genererInstancesAleatoires(int nbInstances)
+Instance** genererInstancesAleatoires(int nbInstances, int n, int m)
 {
     assert(nbInstances >= 0);
 
@@ -197,13 +154,13 @@ Instance** genererInstancesAleatoires(int nbInstances)
 
     // Génération de chaque instance aléatoire.
     for (int i = 0; i < nbInstances; i++)
-        res[i] = genererInstanceAleatoire();
+        res[i] = genererInstanceAleatoire(n, m);
 
     return res;
 }
 
-void triFusionDecroissant(int i, int j, Instance* instance, double* tq,
-                          double* tp)
+void triFusionDecroissant(int i, int j, Instance* instance, int* tq,
+                          int* tp)
 {
     if (j <= i) return;
 
@@ -260,8 +217,8 @@ void triFusionDecroissant(int i, int j, Instance* instance, double* tq,
     }
 }
 
-void triFusionCroissant(int i, int j, Instance* instance, double* tq,
-                        double* tp)
+void triFusionCroissant(int i, int j, Instance* instance, int* tq,
+                        int* tp)
 {
     if (j <= i) return;
 
@@ -322,8 +279,8 @@ void triJacksonQ(Instance* i)
 {
     assert(i);
 
-    double tq[i->n];
-    double tp[i->n];
+    int tq[i->n];
+    int tp[i->n];
     triFusionDecroissant(0, i->n - 1, i, tq, tp);
 }
 
@@ -334,31 +291,32 @@ void triDateDebutCroissante(Instance* instance, Instance* instanceOut,
     for (int i = 0; i < instance->m; i++)
     {
         OrdonnancementMachine* ordo = ordonnancement[i];
-        int size = ordo->tabId->tailleEffectif;
-        double cmax = 0;
+        unsigned int size = getTailleEffectifTableauDynamique(ordo->tabId);
+        int cmax = 0;
         for (int j = 0; j < size; j++)
         {
             int* index = getElementTableauDynamique(ordo->tabId, j);
-            cmax += instance->p[*index - 1];
+            cmax += instance->p[*index];
 
-            instanceOut->p[indice] = instance->q[*index - 1];
+            instanceOut->p[indice] = instance->q[*index];
             instanceOut->q[indice] = cmax;
             indice++;
         }
     }
 
     //instanceOut est désormais initialisé avec pi qui représente le temps de livraison pour un robot et qi qui représente la date de début au plus tôt de la tâche i
-    afficheInstance(instanceOut);
+    // afficheInstance(instanceOut);
 
-    double tq[instanceOut->n];
-    double tp[instanceOut->n];
+    int tq[instanceOut->n];
+    int tp[instanceOut->n];
+
     triFusionCroissant(0, instanceOut->n - 1, instanceOut, tq, tp);
 }
 
-double rasteriserInferieur(double k, double facteur)
+int rasteriserInferieur(int k, double facteur)
 {
     // La formule est floor(k / facteur) * facteur pour la rastérisation
-    return floor(k / facteur) * facteur;
+    return imax((int)(floor(k / facteur) * facteur), 1);
 }
 
 Etat* minDeLensemble(const TableauDynamique* E)

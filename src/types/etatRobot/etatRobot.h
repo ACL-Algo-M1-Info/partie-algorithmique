@@ -18,7 +18,7 @@
 typedef struct _EtatRobot
 {
     /** Durée opératoire max de l'état */
-    double cMax;
+    int cmax;
 
     /** Nombre de machines */
     int m;
@@ -67,7 +67,7 @@ void afficheEtatRobot(void* etat);
  * @param pi la durée opératoire de la tâche i
  * @param qi la date de début au plus tôt de la tâche i
  */
-void ajouterTacheSurRobot(EtatRobot* etat, int k, int i, double pi, double qi);
+void ajouterTacheSurRobot(EtatRobot* etat, int k, int i, int pi, int qi);
 
 /**
  *

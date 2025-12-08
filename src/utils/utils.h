@@ -17,12 +17,6 @@
 /** Facteur d'erreur pour considérer l'égalité de deux doubles. */
 #define DOUBLE_EGALITE_EPSILON 10e-6
 
-/** Borne pour le N maximal. */
-#define MAX_N_ALEA_GEN 50
-
-/** Borne pour le m maximal. */
-#define MAX_M_ALEA_GEN 45
-
 /** Borne pour le p(i) maximal. */
 #define MAX_P_ALEA_GEN 10
 
@@ -40,12 +34,12 @@
 int imax(int a, int b);
 
 /**
- * Détermine si deux doubles sont égaux.
- * @param a Double a.
- * @param b Double b.
- * @return 1 si égaux, 0 sinon.
+ * Calcul du minimum entre deux int.
+ * @param a Valeur A.
+ * @param b Valeur B.
+ * @return Le minimum entre A et B.
  */
-int dblcmp(double a, double b);
+int imin(int a, int b);
 
 /**
  * Supprime un entier
@@ -118,41 +112,21 @@ int arraysIntEgales(int n, const int a[n], const int b[n]);
 int maxArrayInt(int n, const int a[n]);
 
 /**
- * Affiche une liste de double
- * @param n la taille de l'array
- * @param array le tableau de doubles à afficher
- */
-void afficheArrayDouble(int n, const double array[n]);
-
-/**
- * Détermine si deux arrays de doubles sont égales.
- * @param n Taille des deux arrays.
- * @param a Array a.
- * @param b Array b.
- * @return 1 si égales, 0 sinon.
- */
-int arraysDoubleEgales(int n, const double a[n], const double b[n]);
-
-/**
- * Retrouve le double maximal dans l'array. L'array ne doit pas être vide.
- * @param n Taille de l'array > 0.
- * @param a Array.
- * @return Le double max dans l'array.
- */
-double maxArrayDouble(int n, const double a[n]);
-
-/**
  * Génère une instance aléatoirement.
+ * @param n Valeur de N.
+ * @param m Valeur de m.
  * @return Instance générée aléatoirement.
  */
-Instance* genererInstanceAleatoire();
+Instance* genererInstanceAleatoire(int n, int m);
 
 /**
  * Génère un tableau d"instances aléatoires.
  * @param nbInstances Nombre d'instances aléatoires à tester.
+ * @param n Valeur de N.
+ * @param m Valeur de m.
  * @return Le tableau d'instances aléatoires.
  */
-Instance** genererInstancesAleatoires(int nbInstances);
+Instance** genererInstancesAleatoires(int nbInstances, int n, int m);
 
 /**
  * Applique le tri fusion sur les qi d'une instance donnée
@@ -163,7 +137,7 @@ Instance** genererInstancesAleatoires(int nbInstances);
  * @param tq tableau pour stocker provisoirement les qi
  * @param tp tableau pour stocker provisoirement les pi
  */
-void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *tp);
+void triFusionDecroissant(int i, int j, Instance* instance, int *tq, int *tp);
 
 /**
  * Applique le tri fusion sur les qi d'une instance donnée
@@ -174,7 +148,7 @@ void triFusionDecroissant(int i, int j, Instance* instance, double *tq, double *
  * @param tq tableau pour stocker provisoirement les qi
  * @param tp tableau pour stocker provisoirement les pi
  */
-void triFusionCroissant(int i, int j, Instance* instance, double *tq, double *tp);
+void triFusionCroissant(int i, int j, Instance* instance, int *tq, int *tp);
 
 /**
  * Applique l'ordre de Jackson sur les qi d'une instance
@@ -199,7 +173,7 @@ void triDateDebutCroissante(Instance* instance, Instance* instanceOut, Ordonnanc
  * @param facteur Facteur de rastérisation.
  * @return Nombre k rastérisé sur la grille selon facteur.
  */
-double rasteriserInferieur(double k, double facteur);
+int rasteriserInferieur(int k, double facteur);
 
 /**
  * retourne l'état minimisant le Lmax de l'ensemble d'états E

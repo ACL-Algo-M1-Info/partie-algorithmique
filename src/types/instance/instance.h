@@ -17,9 +17,9 @@ typedef struct _Instance
     /** Nombre de machines */
     int m;
     /** Durée opératoire des tâches */
-    double* p;
+    int* p;
     /** Durée de latence des tâches */
-    double* q;
+    int* q;
 } Instance;
 
 // FONCTIONS
@@ -33,7 +33,7 @@ typedef struct _Instance
  * @param q la durée de latence des tâches
  * @return une instance du problème
  */
-Instance* newInstance(int n, int m, double *p, double *q);
+Instance* newInstance(int n, int m, int *p, int *q);
 
 /**
  * Supprime une instance.
@@ -71,13 +71,13 @@ int instancesEgales(const void* a, const void* b);
  * @param instance Instance.
  * @return qmax de l'instance.
  */
-double obtenirQmax(Instance* instance);
+int obtenirQmax(Instance* instance);
 
 /**
  * Obtient le pmax de l'instance.
  * @param instance Instance.
  * @return pmax de l'instance.
  */
-double obtenirPmax(Instance* instance);
+int obtenirPmax(Instance* instance);
 
 #endif //INSTANCE_H

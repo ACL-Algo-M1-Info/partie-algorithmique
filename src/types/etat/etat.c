@@ -72,7 +72,7 @@ void afficheEtat(const void* etat)
     assert(etat);
     const Etat* e = etat;
 
-    printf("Etat[Lmax = %.2lf, m = %d, ordonnancements = ", e->lmax, e->m);
+    printf("Etat[Lmax = %d, m = %d, ordonnancements = ", e->lmax, e->m);
     afficheArray(e->m, (const void**)e->ordonnancements, afficheOrdonnancementMachine);
     printf("]");
 }
@@ -85,7 +85,7 @@ int etatsEgaux(const void* a, const void* b)
     const Etat* j = b;
 
     // Egalité des lmax
-    if (dblcmp(i->lmax, j->lmax) == 0)
+    if (i->lmax != j->lmax)
         return 0;
 
     // Egalité des m
@@ -96,7 +96,7 @@ int etatsEgaux(const void* a, const void* b)
     return arraysEgales(i->m, (const void**)i->ordonnancements, (const void**)j->ordonnancements, ordonnancementsMachinesEgaux);
 }
 
-void ajouterTacheSurMachine(Etat* etat, int k, int i, double pi, double qi)
+void ajouterTacheSurMachine(Etat* etat, int k, int i, int pi, int qi)
 {
     assert(etat);
     assert(k >= 0 && i >= 0 && pi >= 0 && qi >= 0);
@@ -104,7 +104,7 @@ void ajouterTacheSurMachine(Etat* etat, int k, int i, double pi, double qi)
     // On ajoute d'abord la tâche sur la machine pour avoir le nouveau cmax
     ajouterTache(etat->ordonnancements[k], i, pi);
     // Recalcul du lmax selon l'ajout fait précedemment
-    etat->lmax = fmax(etat->ordonnancements[k]->cmax + qi, etat->lmax);
+    etat->lmax = imax(etat->ordonnancements[k]->cmax + qi, etat->lmax);
 }
 
 void ajouterTacheSurMachineParInstance(Etat* etat, int k, int i, Instance* instance)

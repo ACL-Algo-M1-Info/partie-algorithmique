@@ -26,8 +26,8 @@ void testTout()
 
     int m = 2;
     int n = 3;
-    double p[] = {3,7,4};
-    double q[] = {5,9,11};
+    int p[] = {3,7,4};
+    int q[] = {5,9,11};
     Instance * instance = newInstance(n,m,p,q);
     OrdonnancementMachine * ordo = newOrdonnancementMachine();
 
@@ -37,10 +37,10 @@ void testTout()
     // afficheTableauDynamique(E,afficheEtat);
 
     // Etat* minimiserLmax = algoProgrammationDynamique(instance);
-    // printf("\nlmax minimal de l'instance : %lf",minimiserLmax->lmax);
+    // printf("\nlmax minimal de l'instance : %d",minimiserLmax->lmax);
 
     Etat* minimiserLmaxSimplifie = algoProgrammationDynamiqueSimplifie(instance);
-    printf("\nlmax minimal de l'instance : %lf",minimiserLmaxSimplifie->lmax);
+    printf("\nlmax minimal de l'instance : %d",minimiserLmaxSimplifie->lmax);
 }
 int main()
 {

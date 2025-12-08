@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
     int n = 5;
     int m = 3;
 
-    double p[] = {5, 3, 1, 5, 9};
-    double q[] = {5, 4, 3, 2, 1};
+    int p[] = {5, 3, 1, 5, 9};
+    int q[] = {5, 4, 3, 2, 1};
 
     Instance* i = newInstance(n, m, p, q);
 

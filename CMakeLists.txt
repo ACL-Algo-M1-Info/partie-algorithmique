@@ -19,7 +19,7 @@ set(TESTS tests)
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${SRC}/*.c ${SRC}/*.h)
 
 # Exclut src/main.c.
-#list(REMOVE_ITEM SOURCES ${SRC}/main.c)
+list(REMOVE_ITEM SOURCES ${SRC}/main.c)
 
 # Créé la librairie avec les fichiers obtenus.
 add_library(CORE ${SOURCES})
@@ -30,8 +30,8 @@ target_include_directories(CORE PUBLIC ${SRC})
 ### EXECUTABLES ###
 
 ## Executable Exo 5
-add_executable(testExo5 ${TESTS}/testExo5.c)
-target_link_libraries(testExo5 PRIVATE CORE)
+add_executable(main ${SRC}/main.c)
+target_link_libraries(main PRIVATE CORE)
 
 ## Tests
 

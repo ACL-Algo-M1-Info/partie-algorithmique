@@ -4,17 +4,32 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "../src/algos/algo.h"
 #include "../src/types/instance/instance.h"
 #include "utils/utils.h"
 
-#define EPSILON .2
+// DEFINES
+
+#define MAX_N_ALEA_GEN 20
+#define MAX_M_ALEA_GEN 15
+#define EPSILON 1.35
 
 // Test d'un.
 int main(int argc, char *argv[])
 {
-    Instance* i = genererInstanceAleatoire();
+    srand(time(NULL));
+
+    int n = 5;
+    int m = 3;
+
+    int p[] = {5, 3, 1, 5, 9};
+    int q[] = {5, 4, 3, 2, 1};
+
+    Instance* i = newInstance(n, m, p, q);
+    // Instance* i = genererInstanceAleatoire(MAX_N_ALEA_GEN, MAX_M_ALEA_GEN);
     Instance* original = cloneInstance(i);
 
     // On applique l'algo

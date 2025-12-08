@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     int n = 5;
     int m = 3;
 
-    double p[] = {5, 3, 1, 5, 9};
-    double q[] = {1, 2, 3, 4, 5};
+    int p[] = {5, 3, 1, 5, 9};
+    int q[] = {1, 2, 3, 4, 5};
 
     //Init instance
     Instance* i = newInstance(n, m, p, q);
@@ -23,15 +23,15 @@ int main(int argc, char *argv[])
     OrdonnancementMachine* o2 = newOrdonnancementMachine();
     OrdonnancementMachine* o3 = newOrdonnancementMachine();
 
-    ajouterTache(o, 1, 5);
-    ajouterTache(o2, 2, 3);
-    ajouterTache(o3, 3, 1);
-    ajouterTache(o, 4, 5);
-    ajouterTache(o2, 5, 9);
+    ajouterTache(o, 0, 5);
+    ajouterTache(o2, 1, 3);
+    ajouterTache(o3, 2, 1);
+    ajouterTache(o, 3, 5);
+    ajouterTache(o2, 4, 9);
 
     OrdonnancementMachine* tabOrd[] = {o, o2, o3};
 
     //Algo
-    double res = ordonnancementRobot(i, tabOrd, 0.2);
-    printf("\nResultat  : %lf \n", res);
+    int res = ordonnancementRobot(i, tabOrd, 0.2);
+    printf("\nResultat  : %d \n", res);
 }

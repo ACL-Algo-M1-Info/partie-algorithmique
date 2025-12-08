@@ -5,17 +5,25 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-#include "../src/utils/utils.h"
 #include "../src/types/instance/instance.h"
+#include "../src/utils/utils.h"
+
+// DEFINES
+
+#define MAX_N_ALEA_GEN 20
+#define MAX_M_ALEA_GEN 15
 
 // Test d'un etat.
 int main(int argc, char *argv[])
 {
-    int n = 50;
-    Instance **tab = genererInstancesAleatoires(n);
+    srand(time(NULL));
 
-    for (int i = 0; i < n; i++)
+    int nbTaches = 50;
+    Instance **tab = genererInstancesAleatoires(nbTaches, MAX_N_ALEA_GEN, MAX_M_ALEA_GEN);
+
+    for (int i = 0; i < nbTaches; i++)
     {
         Instance *a = tab[i];
 
@@ -29,7 +37,7 @@ int main(int argc, char *argv[])
             assert(a->p[k] <= MAX_P_ALEA_GEN && a->q[k] <= MAX_Q_ALEA_GEN);
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < nbTaches; i++)
         deleteInstance(tab[i]);
 
     free(tab);

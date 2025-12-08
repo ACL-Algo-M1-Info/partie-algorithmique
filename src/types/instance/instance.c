@@ -13,15 +13,15 @@
 
 // FONCTIONS
 
-Instance* newInstance(int n, int m, double *p, double *q)
+Instance* newInstance(int n, int m, int *p, int *q)
 {
     Instance* instance = malloc(sizeof(struct _Instance));
     assert(instance);
 
     instance->n = n;
     instance->m = m;
-    instance->p = malloc(n*sizeof(double));
-    instance->q = malloc(n*sizeof(double));
+    instance->p = malloc(n*sizeof(int));
+    instance->q = malloc(n*sizeof(int));
     assert(instance->p && instance->q);
 
     for (int i = 0; i < n; i++)
@@ -57,9 +57,9 @@ void afficheInstance(const void* instance)
     const Instance* i = instance;
 
     printf("Instance[n = %d, m = %d, p = ", i->n, i->m);
-    afficheArrayDouble(i->n, i->p);
+    afficheArrayInt(i->n, i->p);
     printf(", q = ");
-    afficheArrayDouble(i->n, i->q);
+    afficheArrayInt(i->n, i->q);
     printf("]");
 }
 
@@ -79,26 +79,26 @@ int instancesEgales(const void* a, const void* b)
         return 0;
 
     // Tableaux inégaux des p
-    if (arraysDoubleEgales(i->n, i->p, j->p) == 0)
+    if (arraysIntEgales(i->n, i->p, j->p) == 0)
         return 0;
 
     // Tableaux inégaux des q
-    if (arraysDoubleEgales(i->n, i->q, j->q) == 0)
+    if (arraysIntEgales(i->n, i->q, j->q) == 0)
         return 0;
 
     return 1;
 }
 
-double obtenirQmax(Instance* instance)
+int obtenirQmax(Instance* instance)
 {
     assert(instance);
 
-    return maxArrayDouble(instance->n, instance->q);
+    return maxArrayInt(instance->n, instance->q);
 }
 
-double obtenirPmax(Instance* instance)
+int obtenirPmax(Instance* instance)
 {
     assert(instance);
 
-    return maxArrayDouble(instance->n, instance->p);
+    return maxArrayInt(instance->n, instance->p);
 }

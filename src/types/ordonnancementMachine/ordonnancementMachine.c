@@ -54,7 +54,7 @@ void afficheOrdonnancementMachine(const void* ordonnancement)
     assert(ordonnancement);
     const OrdonnancementMachine* o = ordonnancement;
 
-    printf("\nOrdonnancement [cmax = %.2lf, tabId = ", o->cmax);
+    printf("\nOrdonnancement [cmax = %d, tabId = ", o->cmax);
 
     afficheTableauDynamique(o->tabId, (void (*)(const void*))afficheInt,"id ");
 
@@ -69,7 +69,7 @@ int ordonnancementsMachinesEgaux(const void* a, const void* b)
     const OrdonnancementMachine* j = b;
 
     // Cmax différents (avec marge d'erreur de 10e-6)
-    if (!dblcmp(i->cmax, j->cmax))
+    if (i->cmax != j->cmax)
         return 0;
 
     // Pas les mêmes éléments
@@ -80,7 +80,7 @@ int ordonnancementsMachinesEgaux(const void* a, const void* b)
     return tableauxDynamiquesEgaux(i->tabId, j->tabId, intsEgaux);
 }
 
-void ajouterTache(OrdonnancementMachine* ordonnancement, int i, double pi)
+void ajouterTache(OrdonnancementMachine* ordonnancement, int i, int pi)
 {
     assert(ordonnancement && i >= 0 && pi >= 0);
 
